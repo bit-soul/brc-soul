@@ -7,13 +7,13 @@ it is still imperfect and requires community discussion and improvement.
 brc-soul is a Bitcoin blockchain profile protocol, it's decentralized and safe,
 which will be the basis of many DApps on the Bitcoin.
 
-DID(decentralized identifier) is a decentralized identity system that is not
+**DID(decentralized identifier)** is a decentralized identity system that is not
 restricted by centralized institutions and remains under your control forever. 
 
-VC(verifiable credentials) are digital certificates that help prove an individual's or 
+**VC(verifiable credentials)** are digital certificates that help prove an individual's or 
 system's identity, similar to a physical passport or driver's license.
 
-SBT(soulbond tokens) are permanently tied to the address that first inscribes them,
+**SBT(soulbond tokens)** are permanently tied to the address that first inscribes them,
 non-transferable, ensuring the credibility of the corresponding address identity.
 
 ## Why
