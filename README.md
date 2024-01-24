@@ -16,6 +16,10 @@ system's identity, similar to a physical passport or driver's license.
 **SBT(soulbond tokens)** are permanently tied to the address that first inscribes them,
 non-transferable, ensuring the credibility of the corresponding address identity.
 
+**DSN(Decentralized Social Network)** store social network data decentralizedly to allow 
+you can build your profile and reputation continuously.
+
+
 ## Why
 The lack of regulation in the crypto space brings freedom but also comes with scams.
 Addressing trust issues in anonymous scenarios becomes crucial. This can significantly
@@ -45,13 +49,13 @@ Why should use the Bitcoin chain?
 **add/update profile attribute**
 
     {
-      "p": "brc-soul",              //protocol
-      "op": "attr",                 //attribute option
-      "seq": 0,                     //option sequence, should always increase at the same address
-      "attr": {                     //profile attributes
-        "name": "qrpaper",          //profile name
-        "icon": "ordi://53098586",  //optional profile icon, may be stored in ipfs, http, ordi and so on
-        "xuri": "external json"     //optional extended profile attribute, may be stored in ipfs, http, ordi and so on
+      "p": "brc-soul",                  //protocol
+      "op": "attr",                     //attribute option
+      "seq": 0,                         //option sequence, should always increase at the same address
+      "attr": {                         //profile attributes
+        "name": "qrpaper",              //profile name
+        "icon": "ordi://53098586",      //optional profile icon, may be stored in ipfs, http, ordi and so on, default is ordi
+        "xuri": "external json"         //optional extended profile attribute, may be stored in ipfs, http, ordi and so on, default is ordi
       },
       "sign": "IClzsZoHbyZuC0+H6D4WCAOSRA3Jm6YZQr9aB/ebI4PPKkw+82zvxI+6/jBv5Xa5nWT1C6L6rplU8f3oE1co7Oo=" //BIP137Signature of all the above message with creator private key
     }
@@ -63,7 +67,8 @@ Why should use the Bitcoin chain?
       "op": "attr",
       "seq": 0,
       "attr": {
-        "xuri": null                //set any field to be null to delete the field
+        "icon": null,                   //set any field to be null to delete the field
+        "xuri": null                    //set any field to be null to delete the field
       },
       "sign": "xxx"                 
     }
@@ -75,15 +80,16 @@ Why should use the Bitcoin chain?
 
     {
       "vc": {
-        "vcid": number,             //VC id, should be identity in the same CA address
+        "vcid": number,                 //VC id, should be identity in the same CA address
         "addr": "bc1p3lpgz3246uqc87zp8ex7s7q6xka0z9g0djv9n0e2a3gqqlcetl4stwgrqd", //CA address
-        "attr": {                   //VC attributes
-          "tick": "vc-name",        //VC name, '!' used as reserved character, to allow expanding the protocol
-          "level": 5,               //optional VC level
-          "score": 100,             //optional VC score
-          "xuri": "external json"   //optional extended VC attribute, may be stored in ipfs, http, ordi and so on
+        "attr": {                       //VC attributes
+          "tick": "vc-name",            //VC name, '!' used as reserved character, to allow expanding the protocol
+          "icon": "ordi://53098586",    //optional cv icon, may be stored in ipfs, http, ordi and so on, default is ordi
+          "level": 5,                   //optional VC level
+          "score": 100,                 //optional VC score
+          "xuri": "external json"       //optional extended VC attribute, may be stored in ipfs, http, ordi and so on, default is ordi
         },
-        "sign": "xxx"               //BIP137Signature of all the above messages in vc with CA's private key
+        "sign": "xxx"                   //BIP137Signature of all the above messages in vc with CA's private key
       }   
     }
 
@@ -93,8 +99,8 @@ VC(Verifiable Credentials) is issued by CA(Certificate Authority) through CA's p
 
     {
       "p": "brc-soul",
-      "op": "cancel",               //cancel VC option
-      "vcid": number,               //cancel VC id
+      "op": "cancel",                   //cancel VC option
+      "vcids": [num1, num2, ..., numn]  //cancel VC id
       "sign": "xxx"
     }
 
@@ -107,27 +113,28 @@ cancel should be inscribed to CA's address
 
     {
       "p": "brc-soul",
-      "op": "mint",                 //mint VC option
+      "op": "mint",                     //mint VC option
       "seq": 0,
       "vc": {
         "vcid": number,
         "addr": "ca-addr",
         "attr": {
           "tick": "vc-name",
+          "icon": "ordi://53098586",
           "level": 5,
           "score": 100,
           "xuri": "external json"
         },
-        "sign": "xxx"               //sign of VC
+        "sign": "xxx"                   //sign of VC
       }   
-      "sign": "xxx"                 //sign of option
+      "sign": "xxx"                     //sign of option
     }
 
 **burn SoulBound Token**
 
     {
       "p": "brc-soul",
-      "op": "burn",                 //burn VC option
+      "op": "burn",                     //burn VC option
       "seq": 0,
       "vcid": number,
       "addr": "ca-addr",
@@ -141,7 +148,7 @@ cancel should be inscribed to CA's address
 
     {
       "p": "brc-soul",
-      "op": "fol",                  //follow option
+      "op": "fol",                      //follow option
       "seq": 0,
       "addrs": ["addr1", "addr2", ..., "addrn"]
       "sign": "xxx"
@@ -151,7 +158,7 @@ cancel should be inscribed to CA's address
 
     {
       "p": "brc-soul",
-      "op": "unfol",                //unfollow option
+      "op": "unfol",                    //unfollow option
       "seq": 0,
       "addrs": ["addr1", "addr2", ..., "addrn"]
       "sign": "xxx"
@@ -177,4 +184,4 @@ cancel should be inscribed to CA's address
 * "ca-addr" and "vcid", together, they ensured the uniqueness of the CV.
 * "vc-name" in the "tick" filed, shouldn't use '!', this is used as reserved character, to allow expanding the protocol
 * "sign" message field should be Sorted alphabetically, then serialized, and remove formatting whitespace.
-* "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on.
+* "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on, default is ordi.
