@@ -38,7 +38,7 @@ Why should use the Bitcoin chain?
 ![](docs/img/brc-soul.jpg)
 
 
-### DID profile opration
+### DID Profile opration
 
 **add/update profile attribute**
 
@@ -132,12 +132,37 @@ cancel should be inscribed to CA's address
       "sign": "xxx"
     }
 
+
+### Follow/Unfollow operation
+
+**follow address**
+
+    {
+      "p": "brc-soul",
+      "op": "fol",                  //follow option
+      "seq": 0,
+      "addrs": ["addr1", "addr2", ..., "addrn"]
+      "sign": "xxx"
+    }
+
+**unfollow address**
+
+    {
+      "p": "brc-soul",
+      "op": "unfol",                //unfollow option
+      "seq": 0,
+      "addrs": ["addr1", "addr2", ..., "addrn"]
+      "sign": "xxx"
+    }
+
+
 ## Note
 * The inscription is only valid to its creator, Once effective, the transferability of inscriptions does not correlate with the inscribed information.
 * The sign must be from the creator, to avoid others' poison.
-* seq is not needed continuously but must be increased, to avoid replay attack.
-* attr field can be extended by the application itself, but there will be some standard fields.
-* vcid must not be duplicated in the same address, but different address can have the same vcid.
-* ca-addr and vcid, together, they ensured the uniqueness of the CV.
-* sign message field should be Sorted alphabetically, then serialized, and remove formatting whitespace.
-* xuri is optional extended attribute, may be stored in ipfs, http, ordi and so on.
+* "seq" is not needed continuously but must be increased, to avoid replay attack.
+* "attr" field can be extended by the application itself, but there will be some standard fields.
+* "vcid" must not be duplicated in the same address, but different address can have the same vcid.
+* "ca-addr" and "vcid", together, they ensured the uniqueness of the CV.
+* "sign" message field should be Sorted alphabetically, then serialized, and remove formatting whitespace.
+* "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on.
+* Here we only defined 1-1 follow/unfollow relationship, 1-n group relationship can be realized by CV related opration
