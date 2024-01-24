@@ -26,7 +26,9 @@ applications in scenarios such as:
 1. Lending platforms can adjust corresponding collateral ratios based on the credibility of addresses, thereby improving capital utilization efficiency.
 2. Individuals can assess the credibility of a project based on the reputation of the project initiator's address and decide whether to invest or not.
 3. Individuals can develop their social circles in the crypto world based on the credibility of addresses.
-4. and so on...
+4. The decentralized relationship can be stored on the chain forever, without restriction of any centralized app.
+5. Every app use the same data, we would never need build our profile and reputation again and again.
+6. and so on...
 
 Why should use the Bitcoin chain?
 1. Applications on Bitcoin are just emerging, and there is currently no related protocol for a DID identity system. This is an important area in the crypto community.
@@ -76,7 +78,7 @@ Why should use the Bitcoin chain?
         "vcid": number,             //VC id, should be identity in the same CA address
         "addr": "bc1p3lpgz3246uqc87zp8ex7s7q6xka0z9g0djv9n0e2a3gqqlcetl4stwgrqd", //CA address
         "attr": {                   //VC attributes
-          "tick": "vc-name",        //VC name
+          "tick": "vc-name",        //VC name, '!' used as reserved character, to allow expanding the protocol
           "level": 5,               //optional VC level
           "score": 100,             //optional VC score
           "xuri": "external json"   //optional extended VC attribute, may be stored in ipfs, http, ordi and so on
@@ -133,7 +135,7 @@ cancel should be inscribed to CA's address
     }
 
 
-### Follow/Unfollow operation
+### Social Network operation
 
 **follow address**
 
@@ -155,6 +157,16 @@ cancel should be inscribed to CA's address
       "sign": "xxx"
     }
 
+**group operation**
+
+    group related operation can be realized by CV related operation
+    "apply" : user apply through dapp to join group
+    "issue" : group manager sign and issue CV to allow user join the group
+    "mint"  : user mint the CV as SBT to join the group
+    "burn"  : user burn the CV to leave the group
+    "cancel": group manager can cancel the CV to remove a member
+    we define "tick" field's "cv-name" that start with "grp!" is a group verification
+
 
 ## Note
 * The inscription is only valid to its creator, Once effective, the transferability of inscriptions does not correlate with the inscribed information.
@@ -163,6 +175,6 @@ cancel should be inscribed to CA's address
 * "attr" field can be extended by the application itself, but there will be some standard fields.
 * "vcid" must not be duplicated in the same address, but different address can have the same vcid.
 * "ca-addr" and "vcid", together, they ensured the uniqueness of the CV.
+* "vc-name" in the "tick" filed, shouldn't use '!', this is used as reserved character, to allow expanding the protocol
 * "sign" message field should be Sorted alphabetically, then serialized, and remove formatting whitespace.
 * "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on.
-* Here we only defined 1-1 follow/unfollow relationship, 1-n group relationship can be realized by CV related opration
