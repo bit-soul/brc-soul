@@ -19,6 +19,8 @@ non-transferable, ensuring the credibility of the corresponding address identity
 **DSN(Decentralized Social Network)** store social network data decentralizedly to allow 
 you can build your profile and reputation continuously.
 
+![](docs/img/brc-soul-entity-relationship.jpg)
+
 
 ## Why
 The lack of regulation in the crypto space brings freedom but also comes with scams.
@@ -41,7 +43,7 @@ Why should use the Bitcoin chain?
 
 ## How
 
-![](docs/img/brc-soul.jpg)
+![](docs/img/brc-soul-operations.jpg)
 
 
 ### DID Profile opration
