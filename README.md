@@ -50,8 +50,8 @@ Why should use the Bitcoin chain?
 
     {
       "p": "brc-soul",                  //protocol
-      "op": "attr",                     //attribute option
-      "seq": 0,                         //option sequence, should always increase at the same address
+      "op": "did",                      //attribute option
+      "opid": number,                   //option id, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used
       "attr": {                         //profile attributes
         "name": "qrpaper",              //profile name
         "icon": "ordi://53098586",      //optional profile icon, may be stored in ipfs, http, ordi and so on, default is ordi
@@ -64,8 +64,8 @@ Why should use the Bitcoin chain?
 
     {
       "p": "brc-soul",
-      "op": "attr",
-      "seq": 0,
+      "op": "did",
+      "opid": number,
       "attr": {
         "icon": null,                   //set any field to be null to delete the field
         "xuri": null                    //set any field to be null to delete the field
@@ -116,7 +116,6 @@ cancel should be inscribed to CA's address
     {
       "p": "brc-soul",
       "op": "mint",                     //mint VC option
-      "seq": 0,
       "vc": {
         "caid": number,
         "vcid": number,
@@ -139,7 +138,6 @@ cancel should be inscribed to CA's address
     {
       "p": "brc-soul",
       "op": "burn",                     //burn VC option
-      "seq": 0,
       "caid": number,
       "vcid": number,
       "sign": "xxx"
@@ -153,7 +151,7 @@ cancel should be inscribed to CA's address
     {
       "p": "brc-soul",
       "op": "fol",                      //follow option
-      "seq": 0,
+      "opid": number,
       "dids": [did1, did2, ..., didn]
       "sign": "xxx"
     }
@@ -163,7 +161,7 @@ cancel should be inscribed to CA's address
     {
       "p": "brc-soul",
       "op": "unfol",                    //unfollow option
-      "seq": 0,
+      "opid": number,
       "dids": [did1, did2, ..., didn]
       "sign": "xxx"
     }
@@ -180,10 +178,11 @@ cancel should be inscribed to CA's address
 
 
 ## Note
-* DID number is allocated at the first time people use "attr" operation of the brc-soul protocol validly, it is start from one, zero used as reserved number.
+* DID number is allocated at the first time people use "did" operation of the brc-soul protocol validly, it is start from one, zero used as reserved number.
 * The inscription is only valid to its creator, Once effective, the transferability of inscriptions does not correlate with the inscribed information.
 * The sign must be from the creator, to avoid others' poison.
-* "seq" is not needed continuously but must be increased, to avoid replay attack.
+* "opid" should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used.
+* SBT related opration "mint", "burn", "cancel" are no "opid" field, because the "caid"+"vcid" can distinct them, and we define the burn token can not be remint
 * "attr" field can be extended by the application itself, but there should be some standard fields.
 * "caid" is the CA did of CA, so CA should create their DID first before issue VC.
 * "vcid" must not be duplicated in the same CA did, but different CA can have the same vcid.
