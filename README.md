@@ -13,11 +13,14 @@ restricted by centralized institutions and remains under your control forever.
 **VC(verifiable credentials)** are digital certificates that help prove an individual's or 
 system's identity, similar to a physical passport or driver's license.
 
+**CA(Certificate Authority)** is the entity who issues VC, every one can be CA, the CA's
+authority can also be analyzed on the chain 
+
 **SBT(soulbond tokens)** are permanently tied to the address that first inscribes them,
 non-transferable, ensuring the credibility of the corresponding address identity.
 
 **DSN(Decentralized Social Network)** store social network data decentralizedly to allow 
-you can build your profile and reputation continuously.
+you build your profile and reputation continuously. It's consists of all above entities.
 
 ![](docs/img/brc-soul-entity-relationship.jpg)
 
@@ -26,7 +29,7 @@ you can build your profile and reputation continuously.
 The lack of regulation in the crypto space brings freedom but also comes with scams.
 Addressing trust issues in anonymous scenarios becomes crucial. This can significantly
 reduce trust costs and, consequently, increase productivity in the crypto world.
-DID, VC, and SBT can effectively solve decentralized trust issues and have important
+brc-soul can effectively solve decentralized trust issues and have important
 applications in scenarios such as:
 
 1. Lending platforms can adjust corresponding collateral ratios based on the credibility of addresses, thereby improving capital utilization efficiency.
