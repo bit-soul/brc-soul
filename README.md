@@ -195,3 +195,11 @@ cancel should be inscribed to CA's address
 * "vc-name" in the "tick" filed, shouldn't use '!', this is used as reserved character, to allow expanding the protocol.
 * "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
 * "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on, default is ordi.
+
+
+## Contact us
+1. issues: <https://github.com/qrpaper/brc-soul/issues>
+2. email: <coffeeking001@outlook.com>
+3. telegram: <https://t.me/qrpaper>
+4. discord: <https://discord.gg/3MjNRBhuRv>
+5. twitter: <https://twitter.com/qrpaper_sats>
