@@ -80,11 +80,13 @@ Why should use the Bitcoin chain?
 
     {
       "vc": {
-        "vcid": number,                 //VC id, should be identity in the same CA address
-        "addr": "bc1p3lpgz3246uqc87zp8ex7s7q6xka0z9g0djv9n0e2a3gqqlcetl4stwgrqd", //CA address
+        "caid": number,                 //CA did
+        "vcid": number,                 //VC id, should be identity in the same CA did
         "attr": {                       //VC attributes
           "tick": "vc-name",            //VC name, '!' used as reserved character, to allow expanding the protocol
-          "icon": "ordi://53098586",    //optional cv icon, may be stored in ipfs, http, ordi and so on, default is ordi
+          "icon": "ordi://53098586",    //optional VC icon, may be stored in ipfs, http, ordi and so on, default is ordi
+          "todid": number,              //optional only valid on specified did, to avoid multi mint
+          "expire": 1706146997,         //optional expire timestamp seconds from 1970-01-01 00:00:00 UTC
           "level": 5,                   //optional VC level
           "score": 100,                 //optional VC score
           "xuri": "external json"       //optional extended VC attribute, may be stored in ipfs, http, ordi and so on, default is ordi
@@ -116,11 +118,13 @@ cancel should be inscribed to CA's address
       "op": "mint",                     //mint VC option
       "seq": 0,
       "vc": {
+        "caid": number,
         "vcid": number,
-        "addr": "ca-addr",
         "attr": {
           "tick": "vc-name",
           "icon": "ordi://53098586",
+          "todid": number,
+          "expire": 1706146997,
           "level": 5,
           "score": 100,
           "xuri": "external json"
@@ -136,31 +140,31 @@ cancel should be inscribed to CA's address
       "p": "brc-soul",
       "op": "burn",                     //burn VC option
       "seq": 0,
+      "caid": number,
       "vcid": number,
-      "addr": "ca-addr",
       "sign": "xxx"
     }
 
 
 ### Social Network operation
 
-**follow address**
+**follow dids**
 
     {
       "p": "brc-soul",
       "op": "fol",                      //follow option
       "seq": 0,
-      "addrs": ["addr1", "addr2", ..., "addrn"]
+      "dids": [did1, did2, ..., didn]
       "sign": "xxx"
     }
 
-**unfollow address**
+**unfollow dids**
 
     {
       "p": "brc-soul",
       "op": "unfol",                    //unfollow option
       "seq": 0,
-      "addrs": ["addr1", "addr2", ..., "addrn"]
+      "dids": [did1, did2, ..., didn]
       "sign": "xxx"
     }
 
@@ -172,16 +176,18 @@ cancel should be inscribed to CA's address
     "mint"  : user mint the CV as SBT to join the group
     "burn"  : user burn the CV to leave the group
     "cancel": group manager can cancel the CV to remove a member
-    we define "tick" field's "cv-name" that start with "grp!" is a group verification
+    we define "tick" field's "vc-name" that start with "grp!" is a group verification
 
 
 ## Note
+* DID number is allocated at the first time people use "attr" operation of the brc-soul protocol validly, it is start from one, zero used as reserved number.
 * The inscription is only valid to its creator, Once effective, the transferability of inscriptions does not correlate with the inscribed information.
 * The sign must be from the creator, to avoid others' poison.
 * "seq" is not needed continuously but must be increased, to avoid replay attack.
-* "attr" field can be extended by the application itself, but there will be some standard fields.
-* "vcid" must not be duplicated in the same address, but different address can have the same vcid.
-* "ca-addr" and "vcid", together, they ensured the uniqueness of the CV.
-* "vc-name" in the "tick" filed, shouldn't use '!', this is used as reserved character, to allow expanding the protocol
-* "sign" message field should be Sorted alphabetically, then serialized, and remove formatting whitespace.
+* "attr" field can be extended by the application itself, but there should be some standard fields.
+* "caid" is the CA did of CA, so CA should create their DID first before issue VC.
+* "vcid" must not be duplicated in the same CA did, but different CA can have the same vcid.
+* "caid" and "vcid", together, they ensured the uniqueness of the CV.
+* "vc-name" in the "tick" filed, shouldn't use '!', this is used as reserved character, to allow expanding the protocol.
+* "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
 * "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on, default is ordi.
