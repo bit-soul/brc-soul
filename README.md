@@ -57,8 +57,8 @@ Why should use the Bitcoin chain?
       "p": "brc-soul",                  //protocol
       "op": "did",                      //attribute option
       "opid": number,                   //option id, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used
-      "attr": {                         //did attributes
-        "name": "did-name",             //did name
+      "attr": {                         //optional did attributes
+        "name": "did-name",             //optional did name
         "icon": "ordi://53098586",      //optional did icon, may be stored in ipfs, http, ordi and so on, default is ordi
         "xuri": "external json"         //optional extended did attribute, may be stored in ipfs, http, ordi and so on, default is ordi
       },
@@ -71,7 +71,7 @@ Why should use the Bitcoin chain?
       "p": "brc-soul",
       "op": "did",
       "opid": number,
-      "attr": {
+      "attr": {                         //set attr to be null to delete all the field
         "icon": null,                   //set any field to be null to delete the field
         "xuri": null                    //set any field to be null to delete the field
       },
@@ -87,8 +87,8 @@ Why should use the Bitcoin chain?
       "op": "creupd",                 //create/update VC option
       "opid": number,
       "coid": number,                 //VC collection id, should be identity in the same CA did
-      "attr": {                       //VC collection attributes
-        "name": "vc-collection-name", //VC collection name, '!' used as reserved character, to allow expanding the protocol
+      "attr": {                       //optional VC collection attributes
+        "name": "vc-collection-name", //optional VC collection name, '!' used as reserved character, to allow expanding the protocol
         "icon": "ordi://53098586",    //optional VC collection icon, may be stored in ipfs, http, ordi and so on, default is ordi
         "xuri": "external json"       //optional extended VC collection attribute, may be stored in ipfs, http, ordi and so on, default is ordi
       },
