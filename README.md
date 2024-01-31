@@ -4,7 +4,7 @@ Although it is based on the CySo (CyberSoul) protocol I designed on ETH before,
 it is still imperfect and requires community discussion and improvement.
 
 ## What
-brc-soul is a Bitcoin blockchain profile protocol, it's decentralized and safe,
+brc-soul is the first Bitcoin Social Protocol, it's decentralized and safe,
 which will be the basis of many DApps on the Bitcoin.
 
 **DID(decentralized identifier)** is a decentralized identity system that is not
@@ -14,13 +14,13 @@ restricted by centralized institutions and remains under your control forever.
 system's identity, similar to a physical passport or driver's license.
 
 **CA(Certificate Authority)** is the entity who issues VC, every one can be CA, the CA's
-authority can also be analyzed on the chain 
+authority can also be analyzed on the chain.
 
-**SBT(soulbond tokens)** are permanently tied to the address that first inscribes them,
-non-transferable, ensuring the credibility of the corresponding address identity.
+**SBT(soulbond tokens)** are VCs minted on the chain, it permanently tied to the address that first 
+inscribes them, non-transferable, ensuring the credibility of the corresponding address identity.
 
-**DSN(Decentralized Social Network)** store social network data decentralizedly to allow 
-you build your profile and reputation continuously. It's consists of all above entities.
+**DSN(Decentralized Social Network)** store social network data decentralizedly to allow you 
+build your social network and reputation continuously. It is consists of all above entities.
 
 ![](docs/img/brc-soul-entity-relationship.jpg)
 
@@ -36,7 +36,7 @@ applications in scenarios such as:
 2. Individuals can assess the credibility of a project based on the reputation of the project initiator's address and decide whether to invest or not.
 3. Individuals can develop their social circles in the crypto world based on the credibility of addresses.
 4. The decentralized relationship can be stored on the chain forever, without restriction of any centralized app.
-5. Every app use the same data, we would never need build our profile and reputation again and again.
+5. Every app use the same data, we would never need build our social network and reputation again and again.
 6. and so on...
 
 Why should use the Bitcoin chain?
@@ -51,21 +51,21 @@ Why should use the Bitcoin chain?
 
 ### DID Profile opration
 
-**add/update profile attribute**
+**add/update did attribute**
 
     {
       "p": "brc-soul",                  //protocol
       "op": "did",                      //attribute option
       "opid": number,                   //option id, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used
-      "attr": {                         //profile attributes
-        "name": "qrpaper",              //profile name
-        "icon": "ordi://53098586",      //optional profile icon, may be stored in ipfs, http, ordi and so on, default is ordi
-        "xuri": "external json"         //optional extended profile attribute, may be stored in ipfs, http, ordi and so on, default is ordi
+      "attr": {                         //did attributes
+        "name": "did-name",             //did name
+        "icon": "ordi://53098586",      //optional did icon, may be stored in ipfs, http, ordi and so on, default is ordi
+        "xuri": "external json"         //optional extended did attribute, may be stored in ipfs, http, ordi and so on, default is ordi
       },
       "sign": "IClzsZoHbyZuC0+H6D4WCAOSRA3Jm6YZQr9aB/ebI4PPKkw+82zvxI+6/jBv5Xa5nWT1C6L6rplU8f3oE1co7Oo=" //BIP137Signature of all the above message with creator private key
     }
 
-**delete profile attribute**
+**delete did attribute**
 
     {
       "p": "brc-soul",
@@ -80,38 +80,47 @@ Why should use the Bitcoin chain?
 
 
 ### Certificate Authority operation
+**create/update VC collection**
 
-**issue SoulBound Token**
+    {
+      "p": "brc-soul",
+      "op": "creupd",                 //create/update VC option
+      "opid": number,
+      "coid": number,                 //VC collection id, should be identity in the same CA did
+      "attr": {                       //VC collection attributes
+        "name": "vc-collection-name", //VC collection name, '!' used as reserved character, to allow expanding the protocol
+        "icon": "ordi://53098586",    //optional VC collection icon, may be stored in ipfs, http, ordi and so on, default is ordi
+        "xuri": "external json"       //optional extended VC collection attribute, may be stored in ipfs, http, ordi and so on, default is ordi
+      },
+      "sign": "xxx"
+    } //create should be inscribed to CA's address
+
+**issue Verifiable Credential**
 
     {
       "vc": {
         "caid": number,                 //CA did
+        "coid": number,                 //VC collection id, should be identity in the same CA did
         "vcid": number,                 //VC id, should be identity in the same CA did
-        "attr": {                       //VC attributes
-          "tick": "vc-name",            //VC name, '!' used as reserved character, to allow expanding the protocol
-          "icon": "ordi://53098586",    //optional VC icon, may be stored in ipfs, http, ordi and so on, default is ordi
-          "todid": number,              //optional only valid on specified did, to avoid multi mint
-          "expire": 1706146997,         //optional expire timestamp seconds from 1970-01-01 00:00:00 UTC
+        "attr": {                       //optional VC attributes
           "level": 5,                   //optional VC level
           "score": 100,                 //optional VC score
+          "todid": number,              //optional only allow specified did to mint
+          "expire": 1706146997,         //optional expire timestamp seconds from 1970-01-01 00:00:00 UTC
           "xuri": "external json"       //optional extended VC attribute, may be stored in ipfs, http, ordi and so on, default is ordi
         },
         "sign": "xxx"                   //BIP137Signature of all the above messages in vc with CA's private key
       }   
-    }
+    } //VC is issued by CA through CA's private web server
 
-VC(Verifiable Credentials) is issued by CA(Certificate Authority) through CA's private web server
-
-**cancel SoulBound Token**
+**cancel Verifiable Credential**
 
     {
       "p": "brc-soul",
       "op": "cancel",                   //cancel VC option
       "vcids": [num1, num2, ..., numn]  //cancel VC id
       "sign": "xxx"
-    }
-
-cancel should be inscribed to CA's address
+    } //cancel should be inscribed to CA's address
 
 
 ### Certificate Receiver operation
@@ -120,17 +129,16 @@ cancel should be inscribed to CA's address
 
     {
       "p": "brc-soul",
-      "op": "mint",                     //mint VC option
+      "op": "mint",                     //mint SBT option
       "vc": {
         "caid": number,
+        "coid": number,
         "vcid": number,
         "attr": {
-          "tick": "vc-name",
-          "icon": "ordi://53098586",
-          "todid": number,
-          "expire": 1706146997,
           "level": 5,
           "score": 100,
+          "todid": number,
+          "expire": 1706146997,
           "xuri": "external json"
         },
         "sign": "xxx"                   //sign of VC
@@ -142,7 +150,7 @@ cancel should be inscribed to CA's address
 
     {
       "p": "brc-soul",
-      "op": "burn",                     //burn VC option
+      "op": "burn",                     //burn SBT option
       "caid": number,
       "vcid": number,
       "sign": "xxx"
@@ -151,7 +159,7 @@ cancel should be inscribed to CA's address
 
 ### Social Network operation
 
-**follow dids**
+**follow did**
 
     {
       "p": "brc-soul",
@@ -161,7 +169,7 @@ cancel should be inscribed to CA's address
       "sign": "xxx"
     }
 
-**unfollow dids**
+**unfollow did**
 
     {
       "p": "brc-soul",
@@ -171,7 +179,7 @@ cancel should be inscribed to CA's address
       "sign": "xxx"
     }
 
-**group operation**
+**group operations**
 
     group related operation can be realized by CV related operation
     "apply" : user apply through dapp to join group
@@ -179,7 +187,7 @@ cancel should be inscribed to CA's address
     "mint"  : user mint the CV as SBT to join the group
     "burn"  : user burn the CV to leave the group
     "cancel": group manager can cancel the CV to remove a member
-    we define "tick" field's "vc-name" that start with "grp!" is a group verification
+    we define the "vc-collection-name" that start with "grp!" is a group verification collection
 
 
 ## Note
@@ -190,9 +198,10 @@ cancel should be inscribed to CA's address
 * SBT related opration "mint", "burn", "cancel" are no "opid" field, because the "caid"+"vcid" can distinct them, and we define the burn token can not be remint
 * "attr" field can be extended by the application itself, but there should be some standard fields.
 * "caid" is the CA did of CA, so CA should create their DID first before issue VC.
+* "coid" must not be duplicated in the same CA did, but different CA can have the same coid.
 * "vcid" must not be duplicated in the same CA did, but different CA can have the same vcid.
 * "caid" and "vcid", together, they ensured the uniqueness of the CV.
-* "vc-name" in the "tick" filed, shouldn't use '!', this is used as reserved character, to allow expanding the protocol.
+* "vc-collection-name" shouldn't use '!', this is used as reserved character, to allow expanding the protocol.
 * "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
 * "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on, default is ordi.
 
