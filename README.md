@@ -1,7 +1,4 @@
 # brc-soul
-This is only a preliminary draft.
-Although it is based on the CySo (CyberSoul) protocol I designed on ETH before, 
-it is still imperfect and requires community discussion and improvement.
 
 ## What
 brc-soul is the first Bitcoin Social Protocol, it's decentralized, shareable, and safe,
