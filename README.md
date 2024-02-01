@@ -4,23 +4,24 @@ Although it is based on the CySo (CyberSoul) protocol I designed on ETH before,
 it is still imperfect and requires community discussion and improvement.
 
 ## What
-brc-soul is the first Bitcoin Social Protocol, it's decentralized and safe,
-which will be the basis of many DApps on the Bitcoin.
+brc-soul is the first Bitcoin Social Protocol, it's decentralized, shareable, and safe,
+which will be the basis of many DApps on Bitcoin.
 
-**DID(decentralized identifier)** is a decentralized identity system that is not
-restricted by centralized institutions and remains under your control forever. 
+**DID(decentralized identifier)** is a decentralized identity system that stores
+your profile information on Bitcoin and remains under your control forever. 
 
 **VC(verifiable credentials)** are digital certificates that help prove an individual's or 
 system's identity, similar to a physical passport or driver's license.
 
-**CA(Certificate Authority)** is the entity who issues VC, every one can be CA, the CA's
-authority can also be analyzed on the chain.
+**CA(Certificate Authority)** is the entity that issues VC, everyone can be a CA, and 
+the CA authority can also be certified by other CAs.
 
-**SBT(soulbond tokens)** are VCs minted on the chain, it permanently tied to the address that first 
-inscribes them, non-transferable, ensuring the credibility of the corresponding address identity.
+**SBT(soulbond tokens)** are VCs minted on the chain, they are permanently tied to
+the address that first inscribes them, non-transferable, ensuring the credibility of
+the corresponding address identity.
 
-**DSN(Decentralized Social Network)** store social network data decentralizedly to allow you 
-build your social network and reputation continuously. It is consists of all above entities.
+**DSN(Decentralized Social Network)** when DIDs follow and certificate each other, then 
+the DSN is established, it allows you to build your social network and reputation continuously.
 
 ![](docs/img/brc-soul-entity-relationship.jpg)
 
@@ -93,7 +94,7 @@ Why should use the Bitcoin chain?
         "xuri": "external json"       //optional extended VC collection attribute, may be stored in ipfs, http, ordi and so on, default is ordi
       },
       "sign": "xxx"
-    } //create should be inscribed to CA's address
+    } //creupd should be inscribed to CA's address
 
 **issue Verifiable Credential**
 
