@@ -57,6 +57,7 @@ Why should use the Bitcoin chain?
       "opid": number,                   //option id, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used
       "attr": {                         //optional did attributes
         "name": "did-name",             //optional did name
+        "biog": "did-biography",        //optional did biography
         "icon": "ordi://53098586",      //optional did icon, may be stored in ipfs, http, ordi and so on, default is ordi
         "xuri": "external json"         //optional extended did attribute, may be stored in ipfs, http, ordi and so on, default is ordi
       },
@@ -87,6 +88,7 @@ Why should use the Bitcoin chain?
       "coid": number,                 //VC collection id, should be identity in the same CA did
       "attr": {                       //optional VC collection attributes
         "name": "vc-collection-name", //optional VC collection name, '!' used as reserved character, to allow expanding the protocol
+        "desc": "vc-collection-desc", //optional VC collection description
         "icon": "ordi://53098586",    //optional VC collection icon, may be stored in ipfs, http, ordi and so on, default is ordi
         "xuri": "external json"       //optional extended VC collection attribute, may be stored in ipfs, http, ordi and so on, default is ordi
       },
@@ -101,6 +103,8 @@ Why should use the Bitcoin chain?
         "coid": number,                 //VC collection id, should be identity in the same CA did
         "vcid": number,                 //VC id, should be identity in the same CA did
         "attr": {                       //optional VC attributes
+          "desc": "vc-desc",            //optional VC description
+          "icon": "ordi://53098586",    //optional VC icon, may be stored in ipfs, http, ordi and so on, default is ordi
           "level": 5,                   //optional VC level
           "score": 100,                 //optional VC score
           "todid": number,              //optional only allow specified did to mint
@@ -133,6 +137,8 @@ Why should use the Bitcoin chain?
         "coid": number,
         "vcid": number,
         "attr": {
+          "desc": "vc-desc",
+          "icon": "ordi://53098586",
           "level": 5,
           "score": 100,
           "todid": number,
