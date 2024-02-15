@@ -196,14 +196,16 @@ Why should use the Bitcoin chain?
 
 ## Note
 * DID number is allocated at the first time people use "did" operation of the brc-soul protocol validly, it is start from one, zero used as reserved number.
+* All of the number field (except in attr), shouldn't be zero, or it will be considered as invalid.
+* All of the string field is case sensitive, empty string should be considered as valid.
 * The inscription is only valid to its creator, Once effective, the transferability of inscriptions does not correlate with the inscribed information.
 * The sign must be from the creator, to avoid others' poison.
-* "opid" should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used.
+* "opid" shouldn't be zero, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used.
 * SBT related opration "mint", "burn", "cancel" are no "opid" field, because the "caid"+"vcid" can distinct them, and we define the burn token can not be remint
 * "attr" field can be extended by the application itself, but there should be some standard fields.
 * "caid" is the CA did of CA, so CA should create their DID first before issue VC.
 * "coid" must not be duplicated in the same CA did, but different CA can have the same coid.
-* "vcid" must not be duplicated in the same CA did, but different CA can have the same vcid.
+* "vcid" shouldn't be zero, must not be duplicated in the same CA did, but different CA can have the same vcid.
 * "caid" and "vcid", together, they ensured the uniqueness of the CV.
 * "vc-collection-name" shouldn't use '!', this is used as reserved character, to allow expanding the protocol.
 * "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
