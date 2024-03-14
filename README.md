@@ -53,7 +53,7 @@ Why should use the Bitcoin chain?
 
     {
       "p": "brc-soul",                  //protocol
-      "op": "did",                      //attribute option
+      "op": "did",                      //create/update did option
       "opid": number,                   //option id, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used
       "attr": {                         //optional did attributes
         "name": "did-name",             //optional did name
@@ -163,30 +163,20 @@ Why should use the Bitcoin chain?
 
 ### Social Network operation
 
-**follow did**
+**follow/unfollow did**
 
     {
       "p": "brc-soul",
-      "op": "fol",                      //follow option
+      "op": "net",                      //follow/unfollow option
       "opid": number,
-      "dids": [did1, did2, ..., didn]
-      "sign": "xxx"
-    }
-
-**unfollow did**
-
-    {
-      "p": "brc-soul",
-      "op": "unfol",                    //unfollow option
-      "opid": number,
-      "dids": [did1, did2, ..., didn]
+      "fol": [did11, did12, ..., did1n],
+      "unf": [did21, did22, ..., did2n],
       "sign": "xxx"
     }
 
 **group operations**
 
     group related operation can be realized by CV related operation
-    "apply" : user apply through dapp to join group
     "issue" : group manager sign and issue CV to allow user join the group
     "mint"  : user mint the CV as SBT to join the group
     "burn"  : user burn the CV to leave the group
