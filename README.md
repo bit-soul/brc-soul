@@ -78,6 +78,30 @@ Why should use the Bitcoin chain?
     }
 
 
+### Social Network operation
+
+**follow/unfollow did**
+
+    {
+      "p": "brc-soul",
+      "op": "net",                      //follow/unfollow option
+      "opid": number,
+      "fol": [did11, did12, ..., did1n],
+      "unf": [did21, did22, ..., did2n],
+      "sign": "xxx"
+    }
+
+**group operations**
+
+    group related operation can be realized by CV related operation
+    "creupd": group manager create or update group infomation
+    "issue" : group manager sign and issue CV to allow user join the group
+    "mint"  : user mint the CV as SBT to join the group
+    "burn"  : user burn the CV to leave the group
+    "cancel": group manager can cancel the CV to remove a member
+    we define the "vc-collection-name" that start with "grp!" is a group verification collection
+
+
 ### Certificate Authority operation
 **create/update VC collection**
 
@@ -159,29 +183,6 @@ Why should use the Bitcoin chain?
       "vcid": number,
       "sign": "xxx"
     }
-
-
-### Social Network operation
-
-**follow/unfollow did**
-
-    {
-      "p": "brc-soul",
-      "op": "net",                      //follow/unfollow option
-      "opid": number,
-      "fol": [did11, did12, ..., did1n],
-      "unf": [did21, did22, ..., did2n],
-      "sign": "xxx"
-    }
-
-**group operations**
-
-    group related operation can be realized by CV related operation
-    "issue" : group manager sign and issue CV to allow user join the group
-    "mint"  : user mint the CV as SBT to join the group
-    "burn"  : user burn the CV to leave the group
-    "cancel": group manager can cancel the CV to remove a member
-    we define the "vc-collection-name" that start with "grp!" is a group verification collection
 
 
 ## Note
