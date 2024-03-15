@@ -7,6 +7,9 @@ which will be the basis of many DApps on Bitcoin.
 **DID(decentralized identifier)** is a decentralized identity system that stores
 your profile information on Bitcoin and remains under your control forever. 
 
+**DSN(Decentralized Social Network)** when DIDs follow and certificate each other, then 
+the DSN is established, it allows you to build your social network and reputation continuously.
+
 **VC(verifiable credentials)** are digital certificates that help prove an individual's or 
 system's identity, similar to a physical passport or driver's license.
 
@@ -16,9 +19,6 @@ the CA authority can also be certified by other CAs.
 **SBT(soulbond tokens)** are VCs minted on the chain, they are permanently tied to
 the address that first inscribes them, non-transferable, ensuring the credibility of
 the corresponding address identity.
-
-**DSN(Decentralized Social Network)** when DIDs follow and certificate each other, then 
-the DSN is established, it allows you to build your social network and reputation continuously.
 
 ![](docs/img/brc-soul-entity-relationship.jpg)
 
