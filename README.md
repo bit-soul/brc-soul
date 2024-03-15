@@ -84,10 +84,10 @@ Why should use the Bitcoin chain?
 
     {
       "p": "brc-soul",
-      "op": "net",                      //follow/unfollow option
+      "op": "net",                       //follow/unfollow option
       "opid": number,
-      "fol": [did11, did12, ..., did1n],
-      "unf": [did21, did22, ..., did2n],
+      "fol": [did11, did12, ..., did1n], //new follow did list
+      "unf": [did21, did22, ..., did2n], //unfollow did list
       "sign": "xxx"
     }
 
