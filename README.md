@@ -109,7 +109,7 @@ Why should use the Bitcoin chain?
       "p": "brc-soul",
       "op": "creupd",                 //create/update VC option
       "opid": number,
-      "coid": number,                 //VC collection id, should be identity in the same CA did
+      "coid": number,                 //VC collection id, should be identity global, ((CA_did<<16)|16bit_number) 
       "attr": {                       //optional VC collection attributes
         "name": "vc-collection-name", //optional VC collection name, '!' used as reserved character, to allow expanding the protocol
         "desc": "vc-collection-desc", //optional VC collection description
@@ -123,9 +123,8 @@ Why should use the Bitcoin chain?
 
     {
       "vc": {
-        "caid": number,                 //CA did
-        "coid": number,                 //VC collection id, should be identity in the same CA did
-        "vcid": number,                 //VC id, should be identity in the same CA did
+        "coid": number,                 //VC collection id, should be identity global, ((CA_did<<16)|16bit_number) 
+        "vcid": number,                 //VC id, should be identity in the same collection
         "attr": {                       //optional VC attributes
           "desc": "vc-desc",            //optional VC description
           "icon": "ordi://53098586",    //optional VC icon, may be stored in ipfs, http, ordi and so on, default is ordi
@@ -144,7 +143,7 @@ Why should use the Bitcoin chain?
     {
       "p": "brc-soul",
       "op": "cancel",                   //cancel VC option
-      "vcids": [num1, num2, ..., numn]  //cancel VC id
+      "vcs": [[coid, [vcid1, vcid2, ..., vcidn], ...]  //cancel VC id
       "sign": "xxx"
     } //cancel should be inscribed to CA's address
 
@@ -157,7 +156,6 @@ Why should use the Bitcoin chain?
       "p": "brc-soul",
       "op": "mint",                     //mint SBT option
       "vc": {
-        "caid": number,
         "coid": number,
         "vcid": number,
         "attr": {
@@ -179,7 +177,7 @@ Why should use the Bitcoin chain?
     {
       "p": "brc-soul",
       "op": "burn",                     //burn SBT option
-      "caid": number,
+      "coid": number,
       "vcid": number,
       "sign": "xxx"
     }
@@ -192,12 +190,11 @@ Why should use the Bitcoin chain?
 * The inscription is only valid to its creator, Once effective, the transferability of inscriptions does not correlate with the inscribed information.
 * The sign must be from the creator, to avoid others' poison.
 * "opid" shouldn't be zero, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used.
-* SBT related opration "mint", "burn", "cancel" are no "opid" field, because the "caid"+"vcid" can distinct them, and we define the burn token can not be remint
+* SBT related opration "mint", "burn", "cancel" are no "opid" field, because the "coid"+"vcid" can distinct them, and we define the burn/cancel token can not be remint
 * "attr" field can be extended by the application itself, but there should be some standard fields.
-* "caid" is the CA did of CA, so CA should create their DID first before issue VC.
-* "coid" must not be duplicated in the same CA did, but different CA can have the same coid.
-* "vcid" shouldn't be zero, must not be duplicated in the same CA did, but different CA can have the same vcid.
-* "caid" and "vcid", together, they ensured the uniqueness of the CV.
+* "coid" must be identity global, ((CA_did<<16)|16bit_number) 
+* "vcid" shouldn't be zero, must be identity in the same collection
+* "coid" and "vcid", together, they ensured the uniqueness of the CV.
 * "vc-collection-name" shouldn't use '!', this is used as reserved character, to allow expanding the protocol.
 * "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
 * "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on, default is ordi.
