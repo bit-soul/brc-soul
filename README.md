@@ -93,13 +93,12 @@ Why should use the Bitcoin chain?
 
 **group operations**
 
-    group related operation can be realized by CV related operation
+    group related operation can be realized by CV related operation, with coid_flag 0x01
     "creupd": group manager create or update group infomation
     "issue" : group manager sign and issue CV to allow user join the group
     "mint"  : user mint the CV as SBT to join the group
     "burn"  : user burn the CV to leave the group
     "cancel": group manager can cancel the CV to remove a member
-    we define the "vc-collection-name" that start with "grp!" is a group verification collection
 
 
 ### Certificate Authority operation
@@ -109,9 +108,9 @@ Why should use the Bitcoin chain?
       "p": "brc-soul",
       "op": "creupd",                 //create/update VC option
       "opid": number,
-      "coid": number,                 //VC collection id, should be identity global, ((CA_did<<16)|16bit_number) 
+      "coid": number,                 //VC collection id, should be identity global, ((CA_did<<16)|8bit_flag|16bit_number) 
       "attr": {                       //optional VC collection attributes
-        "name": "vc-collection-name", //optional VC collection name, '!' used as reserved character, to allow expanding the protocol
+        "name": "vc-collection-name", //optional VC collection name
         "desc": "vc-collection-desc", //optional VC collection description
         "icon": "ordi://53098586",    //optional VC collection icon, may be stored in ipfs, http, ordi and so on, default is ordi
         "xuri": "external json"       //optional extended VC collection attribute, may be stored in ipfs, http, ordi and so on, default is ordi
@@ -123,7 +122,7 @@ Why should use the Bitcoin chain?
 
     {
       "vc": {
-        "coid": number,                 //VC collection id, should be identity global, ((CA_did<<16)|16bit_number) 
+        "coid": number,                 //VC collection id, should be identity global, ((CA_did<<16)|8bit_flag|16bit_number) 
         "vcid": number,                 //VC id, should be identity in the same collection
         "attr": {                       //optional VC attributes
           "desc": "vc-desc",            //optional VC description
@@ -195,7 +194,6 @@ Why should use the Bitcoin chain?
 * "coid" must be identity global, ((CA_did<<16)|16bit_number) 
 * "vcid" shouldn't be zero, must be identity in the same collection
 * "coid" and "vcid", together, they ensured the uniqueness of the CV.
-* "vc-collection-name" shouldn't use '!', this is used as reserved character, to allow expanding the protocol.
 * "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
 * "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on, default is ordi.
 
