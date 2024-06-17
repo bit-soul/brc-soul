@@ -106,9 +106,9 @@ Why should use the Bitcoin chain?
 
     {
       "p": "brc-soul",
-      "op": "creupd",                 //create/update VC option
+      "op": "creupd",                 //create/update VC collection option
       "opid": number,
-      "coid": number,                 //VC collection id, should be identity global, ((CA_did<<16)|8bit_flag|16bit_number) 
+      "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
       "attr": {                       //optional VC collection attributes
         "name": "vc-collection-name", //optional VC collection name
         "desc": "vc-collection-desc", //optional VC collection description
@@ -122,7 +122,7 @@ Why should use the Bitcoin chain?
 
     {
       "vc": {
-        "coid": number,                 //VC collection id, should be identity global, ((CA_did<<16)|8bit_flag|16bit_number) 
+        "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
         "vcid": number,                 //VC id, should be identity in the same collection
         "attr": {                       //optional VC attributes
           "desc": "vc-desc",            //optional VC description
@@ -191,7 +191,7 @@ Why should use the Bitcoin chain?
 * "opid" shouldn't be zero, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used.
 * SBT related opration "mint", "burn", "cancel" are no "opid" field, because the "coid"+"vcid" can distinct them, and we define the burn/cancel token can not be remint
 * "attr" field can be extended by the application itself, but there should be some standard fields.
-* "coid" must be identity global, ((CA_did<<16)|16bit_number) 
+* "coid" must be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
 * "vcid" shouldn't be zero, must be identity in the same collection
 * "coid" and "vcid", together, they ensured the uniqueness of the CV.
 * "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
