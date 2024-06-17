@@ -94,7 +94,7 @@ Why should use the Bitcoin chain?
 **group operations**
 
     group related operation can be realized by CV related operation, with coid_flag 0x01
-    "creupd": group manager create or update group infomation
+    "vcc"   : group manager create or update group infomation
     "issue" : group manager sign and issue CV to allow user join the group
     "mint"  : user mint the CV as SBT to join the group
     "burn"  : user burn the CV to leave the group
@@ -106,7 +106,7 @@ Why should use the Bitcoin chain?
 
     {
       "p": "brc-soul",
-      "op": "creupd",                 //create/update VC collection option
+      "op": "vcc",                    //create/update VC collection option
       "opid": number,
       "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
       "attr": {                       //optional VC collection attributes
@@ -116,7 +116,7 @@ Why should use the Bitcoin chain?
         "xuri": "external json"       //optional extended VC collection attribute, may be stored in ipfs, http, ordi and so on, default is ordi
       },
       "sign": "xxx"
-    } //creupd should be inscribed to CA's address
+    } //vcc should be inscribed to CA's address
 
 **issue Verifiable Credential**
 
