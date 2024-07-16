@@ -125,12 +125,15 @@ Why should use the Bitcoin chain?
         "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
         "vcid": number,                 //VC id, should be identity in the same collection
         "attr": {                       //optional VC attributes
+          "name": "vc-name",            //optional VC name
           "desc": "vc-desc",            //optional VC description
           "icon": "ordi://53098586",    //optional VC icon, may be stored in ipfs, http, ordi and so on, default is ordi
           "level": 5,                   //optional VC level
           "score": 100,                 //optional VC score
           "todid": number,              //optional only allow specified did to mint
           "expire": 1706146997,         //optional expire timestamp seconds from 1970-01-01 00:00:00 UTC
+          "limitnum": number,           //optional limit to the first limitnum number minter
+          "limitutc": 1706146997,       //optional limit to the minter before the limitutc time
           "xuri": "external json"       //optional extended VC attribute, may be stored in ipfs, http, ordi and so on, default is ordi
         },
         "sign": "xxx"                   //BIP137Signature of all the above messages in vc with CA's private key
@@ -158,13 +161,11 @@ Why should use the Bitcoin chain?
         "coid": number,
         "vcid": number,
         "attr": {
+          "name": "vc-name",
           "desc": "vc-desc",
           "icon": "ordi://53098586",
-          "level": 5,
-          "score": 100,
-          "todid": number,
-          "expire": 1706146997,
-          "xuri": "external json"
+          "xuri": "external json",
+          ...
         },
         "sign": "xxx"                   //sign of VC
       }   
