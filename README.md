@@ -58,8 +58,8 @@ Why should use the Bitcoin chain?
       "attr": {                         //optional did attributes
         "name": "did-name",             //optional did name
         "biog": "did-biography",        //optional did biography
-        "icon": "ordi://53098586",      //optional did icon, may be stored in ipfs, http, ordi and so on, default is ordi
-        "xuri": "external json"         //optional extended did attribute, may be stored in ipfs, http, ordi and so on, default is ordi
+        "icon": "ordi://53098586",      //optional did icon, may be stored in ipfs, http, ordi and so on
+        "xuri": "external json"         //optional extended did attribute, may be stored in ipfs, http, ordi and so on
       },
       "sign": "IClzsZoHbyZuC0+H6D4WCAOSRA3Jm6YZQr9aB/ebI4PPKkw+82zvxI+6/jBv5Xa5nWT1C6L6rplU8f3oE1co7Oo=" //BIP137Signature of all the above message with creator private key
     }
@@ -112,8 +112,8 @@ Why should use the Bitcoin chain?
       "attr": {                       //optional VC collection attributes
         "name": "vc-collection-name", //optional VC collection name
         "desc": "vc-collection-desc", //optional VC collection description
-        "icon": "ordi://53098586",    //optional VC collection icon, may be stored in ipfs, http, ordi and so on, default is ordi
-        "xuri": "external json"       //optional extended VC collection attribute, may be stored in ipfs, http, ordi and so on, default is ordi
+        "icon": "ordi://53098586",    //optional VC collection icon, may be stored in ipfs, http, ordi and so on
+        "xuri": "external json"       //optional extended VC collection attribute, may be stored in ipfs, http, ordi and so on
       },
       "sign": "xxx"
     } //vcc should be inscribed to CA's address
@@ -127,14 +127,14 @@ Why should use the Bitcoin chain?
         "attr": {                       //optional VC attributes
           "name": "vc-name",            //optional VC name
           "desc": "vc-desc",            //optional VC description
-          "icon": "ordi://53098586",    //optional VC icon, may be stored in ipfs, http, ordi and so on, default is ordi
+          "icon": "ordi://53098586",    //optional VC icon, may be stored in ipfs, http, ordi and so on
+          "xuri": "external json"       //optional extended VC attribute, may be stored in ipfs, http, ordi and so on
           "level": 5,                   //optional VC level
           "score": 100,                 //optional VC score
           "todid": number,              //optional only allow specified did to mint
           "expire": 1706146997,         //optional expire timestamp seconds from 1970-01-01 00:00:00 UTC
           "limitnum": number,           //optional limit to the first limitnum number minter
           "limitutc": 1706146997,       //optional limit to the minter before the limitutc time
-          "xuri": "external json"       //optional extended VC attribute, may be stored in ipfs, http, ordi and so on, default is ordi
         },
         "sign": "xxx"                   //BIP137Signature of all the above messages in vc with CA's private key
       }   
@@ -196,7 +196,7 @@ Why should use the Bitcoin chain?
 * "vcid" shouldn't be zero, must be identity in the same collection
 * "coid" and "vcid", together, they ensured the uniqueness of the CV.
 * "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
-* "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on, default is ordi.
+* "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on
 
 
 ## Contact us
