@@ -129,6 +129,7 @@ Why should use the Bitcoin chain?
           "desc": "vc-desc",            //optional VC description
           "icon": "ordi://53098586",    //optional VC icon, may be stored in ipfs, http, ordi and so on
           "xuri": "external json"       //optional extended VC attribute, may be stored in ipfs, http, ordi and so on
+          "time": 1706146997,           //optional sign and issue time, diffrent from mint time
           "level": 5,                   //optional VC level
           "score": 100,                 //optional VC score
           "todid": number,              //optional only allow specified did to mint
