@@ -201,8 +201,9 @@ Why should use the Bitcoin chain?
 
 
 ## Contact us
-1. issues: <https://github.com/qrpaper/brc-soul/issues>
+1. issues: <https://github.com/bit-soul/brc-soul/issues>
 2. email: <coffeeking001@outlook.com>
-3. telegram: <https://t.me/bitsoul_xyz>
-4. discord: <https://discord.gg/3MjNRBhuRv>
-5. twitter: <https://twitter.com/bitsoul_xyz>
+3. medium: <https://bitsoul.medium.com>
+4. telegram: <https://t.me/bitsoul_xyz>
+5. discord: <https://discord.gg/3MjNRBhuRv>
+6. twitter: <https://twitter.com/bitsoul_xyz>
