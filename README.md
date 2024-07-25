@@ -124,12 +124,13 @@ Why should use the Bitcoin chain?
       "vc": {
         "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
         "vcid": number,                 //VC id, should be identity in the same collection
+        "flag": number,                 //flag to use by CA itself
+        "time": 1706146997,             //sign and issue time, must before mint time
         "attr": {                       //optional VC attributes
           "name": "vc-name",            //optional VC name
           "desc": "vc-desc",            //optional VC description
           "icon": "ordi://53098586",    //optional VC icon, may be stored in ipfs, http, ordi and so on
           "xuri": "external json"       //optional extended VC attribute, may be stored in ipfs, http, ordi and so on
-          "time": 1706146997,           //optional sign and issue time, diffrent from mint time
           "level": 5,                   //optional VC level
           "score": 100,                 //optional VC score
           "todid": number,              //optional only allow specified did to mint
@@ -146,7 +147,12 @@ Why should use the Bitcoin chain?
     {
       "p": "brc-soul",
       "op": "cancel",                   //cancel VC option
-      "vcs": [[coid, [vcid1, vcid2, ..., vcidn]], ...],  //cancel VC id
+      "vcs": [[coid, [vcid1, vcid2, ..., vcidn]], //cancel VC by vcid
+              [coid, flag],                       //cancel VC by flag
+              [coid, time_start, time_end],       //cancel VC by time [start, end), time must before mint time
+              [coid, flag, time_start, time_end], //cancel VC by flag and time [start, end), must before mint time
+              [coid],                             //cancel VC in coid all (not allowed here!)
+              ...],  
       "sign": "xxx"
     } //cancel should be inscribed to CA's address
 
@@ -162,6 +168,8 @@ Why should use the Bitcoin chain?
       "vc": {
         "coid": number,
         "vcid": number,
+        "flag": number,
+        "time": 1706146997,
         "attr": {
           "name": "vc-name",
           "desc": "vc-desc",
@@ -180,14 +188,19 @@ Why should use the Bitcoin chain?
       "p": "brc-soul",
       "op": "burn",                     //burn SBT option
       "opid": number,
-      "vcs": [[coid, [vcid1, vcid2, ..., vcidn]], ...],  //burn VC id
+      "vcs": [[coid, [vcid1, vcid2, ..., vcidn]], //burn SBT by vcid
+              [coid, flag],                       //burn SBT by flag
+              [coid, time_start, time_end],       //burn SBT by time [start, end), time must before mint time
+              [coid, flag, time_start, time_end], //burn SBT by flag and time [start, end), must before mint time
+              [coid],                             //burn SBT in coid all
+              ...],  
       "sign": "xxx"
     }
 
 
 ## Note
 * DID number is allocated at the first time people use "did" operation of the brc-soul protocol validly, it is start from one, zero used as reserved number.
-* All of the number field (except in attr), shouldn't be zero, or it will be considered as invalid.
+* All of the id field shouldn't be zero, or it will be considered as invalid.
 * All of the string field is case sensitive, empty string should be considered as valid.
 * The inscription is only valid to its creator, Once effective, the transferability of inscriptions does not correlate with the inscribed information.
 * The sign must be from the creator, to avoid others' poison.
