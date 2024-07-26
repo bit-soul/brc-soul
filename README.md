@@ -149,8 +149,8 @@ Why should use the Bitcoin chain?
       "op": "cancel",                   //cancel VC option
       "vcs": [[coid, [vcid1, vcid2, ..., vcidn]], //cancel VC by vcid
               [coid, flag],                       //cancel VC by flag
-              [coid, time_start, time_end],       //cancel VC by time [start, end), time must before mint time
-              [coid, flag, time_start, time_end], //cancel VC by flag and time [start, end), must before mint time
+              [coid, time_start, time_end],       //cancel VC by time [start, end], time must before mint time
+              [coid, flag, time_start, time_end], //cancel VC by flag and time [start, end], must before mint time
               [coid],                             //cancel VC in coid all (not allowed here!)
               ...],  
       "sign": "xxx"
@@ -190,8 +190,8 @@ Why should use the Bitcoin chain?
       "opid": number,
       "vcs": [[coid, [vcid1, vcid2, ..., vcidn]], //burn SBT by vcid
               [coid, flag],                       //burn SBT by flag
-              [coid, time_start, time_end],       //burn SBT by time [start, end), time must before mint time
-              [coid, flag, time_start, time_end], //burn SBT by flag and time [start, end), must before mint time
+              [coid, time_start, time_end],       //burn SBT by time [start, end], time must before mint time
+              [coid, flag, time_start, time_end], //burn SBT by flag and time [start, end], must before mint time
               [coid],                             //burn SBT in coid all
               ...],  
       "sign": "xxx"
