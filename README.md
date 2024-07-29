@@ -204,14 +204,15 @@ Why should use the Bitcoin chain?
 * All of the string field is case sensitive, empty string should be considered as valid.
 * The inscription is only valid to its creator, Once effective, the transferability of inscriptions does not correlate with the inscribed information.
 * The sign must be from the creator, to avoid others' poison.
-* vc issue and cancel opration have no "opid" field, because issue is out-link operation and canceled vcid should be invalid forever 
+* vc issue and cancel opration have no "opid" field, because issue is out-link operation and canceled vcid should be invalid forever.
 * "opid" shouldn't be zero, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used.
 * "attr" field can be extended by the application itself, but there should be some standard fields.
-* "coid" must be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
-* "vcid" shouldn't be zero, must be identity in the same collection
+* "time" field should use UTC time, and accurate to seconds.
+* "coid" must be identity global, ((CA_did<<24)|8bit_flag|16bit_number).
+* "vcid" shouldn't be zero, must be identity in the same collection.
 * "coid" and "vcid", together, they ensured the uniqueness of the CV.
 * "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
-* "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on
+* "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on.
 
 
 ## Contact us
