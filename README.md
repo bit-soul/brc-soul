@@ -125,7 +125,7 @@ Why should use the Bitcoin chain?
         "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
         "vcid": number,                 //VC id, should be identity in the same collection
         "flag": number,                 //flag to use by CA itself
-        "time": 1706146997,             //sign and issue time, must before mint time
+        "time": 1706146997,             //sign and issue time, must before mint time, for security you can set it to < current_time - 10s
         "attr": {                       //optional VC attributes
           "name": "vc-name",            //optional VC name
           "desc": "vc-desc",            //optional VC description
