@@ -125,7 +125,7 @@ Why should use the Bitcoin chain?
         "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
         "vcid": number,                 //VC id, should be identity in the same collection
         "flag": number,                 //flag to use by CA itself
-        "time": 1706146997,             //sign and issue time, must before mint time, for security you can set it to < current_time - 10s
+        "time": 1706146997,             //sign and issue time, must before mint time (+7200s)
         "attr": {                       //optional VC attributes
           "name": "vc-name",            //optional VC name
           "desc": "vc-desc",            //optional VC description
@@ -150,8 +150,8 @@ Why should use the Bitcoin chain?
       "vcs": [[1, coid],                             //type_1, cancel VC in coid all (not allowed here! to avoid destroy all collection)
               [2, coid, [vcid1, vcid2, ..., vcidn]], //type_2, cancel VC by vcid
               [3, coid, flag],                       //type_3, cancel VC by flag
-              [4, coid, time_start, time_end],       //type_4, cancel VC by time [start, end], time must before mint time
-              [5, coid, flag, time_start, time_end], //type_5, cancel VC by flag and time [start, end], must before mint time
+              [4, coid, time_start, time_end],       //type_4, cancel VC by time [start, end], time must before mint time (+7200s)
+              [5, coid, flag, time_start, time_end], //type_5, cancel VC by flag and time [start, end], must before mint time (+7200s)
               ...],  
       "sign": "xxx"
     } //cancel should be inscribed to CA's address
@@ -191,8 +191,8 @@ Why should use the Bitcoin chain?
       "vcs": [[1, coid],                             //type_1, burn SBT in coid all
               [2, coid, [vcid1, vcid2, ..., vcidn]], //type_2, burn SBT by vcid
               [3, coid, flag],                       //type_3, burn SBT by flag
-              [4, coid, time_start, time_end],       //type_4, burn SBT by time [start, end], time must before mint time
-              [5, coid, flag, time_start, time_end], //type_5, burn SBT by flag and time [start, end], must before mint time
+              [4, coid, time_start, time_end],       //type_4, burn SBT by time [start, end], time must before mint time (+7200s)
+              [5, coid, flag, time_start, time_end], //type_5, burn SBT by flag and time [start, end], must before mint time (+7200s)
               ...],  
       "sign": "xxx"
     }
