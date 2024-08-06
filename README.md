@@ -42,6 +42,7 @@ Why should use the Bitcoin chain?
 2. Bitcoin is currently the most secure chain, and personal identity information is the most important information for everyone, so it should be stored on the most secure chain.
 3. The various DID identity systems on different chains have caused severe fragmentation in the ecosystem. Bitcoin's position is the most hopeful for standardizing DID identity systems.
 
+
 ## How
 
 ![](docs/img/brc-soul-operations.jpg)
@@ -215,7 +216,7 @@ Why should use the Bitcoin chain?
 * "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on.
 
 
-## Contact us
+## Official Links
 1. issues: <https://github.com/bit-soul/brc-soul/issues>
 2. email: <coffeeking001@outlook.com>
 3. medium: <https://bitsoul.medium.com>
