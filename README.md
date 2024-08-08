@@ -41,6 +41,7 @@ Why should use the Bitcoin chain?
 1. Applications on Bitcoin are just emerging, and there is currently no related protocol for a DID identity system. This is an important area in the crypto community.
 2. Bitcoin is currently the most secure chain, and personal identity information is the most important information for everyone, so it should be stored on the most secure chain.
 3. The various DID identity systems on different chains have caused severe fragmentation in the ecosystem. Bitcoin's position is the most hopeful for standardizing DID identity systems.
+4. With the Bitcoin halving, miner revenues decrease, and Bitcoin's hash power is threatened, new applications can ensure sustained hash power.
 
 
 ## How
