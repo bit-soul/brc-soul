@@ -126,8 +126,14 @@ Why should use the Bitcoin chain?
       "vc": {
         "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
         "vcid": number,                 //VC id, should be identity in the same collection
-        "flag": number,                 //flag to use by CA itself
+        "flag": number,                 //optional flag to use by CA itself
         "time": 1706146997,             //sign and issue time, must before mint time (+7200s)
+        "ctrl": {                       //optional VC control
+          "todid": number,              //optional only allow specified did to mint
+          "expire": 1706146997,         //optional expire timestamp seconds from 1970-01-01 00:00:00 UTC
+          "limitnum": number,           //optional limit to the first limitnum number minter
+          "limitutc": 1706146997,       //optional limit to the minter before the limitutc time
+        },
         "attr": {                       //optional VC attributes
           "name": "vc-name",            //optional VC name
           "desc": "vc-desc",            //optional VC description
@@ -135,10 +141,6 @@ Why should use the Bitcoin chain?
           "xuri": "external json"       //optional extended VC attribute, may be stored in ipfs, http, ordi and so on
           "level": 5,                   //optional VC level
           "score": 100,                 //optional VC score
-          "todid": number,              //optional only allow specified did to mint
-          "expire": 1706146997,         //optional expire timestamp seconds from 1970-01-01 00:00:00 UTC
-          "limitnum": number,           //optional limit to the first limitnum number minter
-          "limitutc": 1706146997,       //optional limit to the minter before the limitutc time
         },
         "sign": "xxx"                   //BIP137Signature of all the above messages in vc with CA's private key
       }   
@@ -172,6 +174,9 @@ Why should use the Bitcoin chain?
         "vcid": number,
         "flag": number,
         "time": 1706146997,
+        "ctrl": {
+          ...
+        },
         "attr": {
           "name": "vc-name",
           "desc": "vc-desc",
@@ -208,7 +213,7 @@ Why should use the Bitcoin chain?
 * The sign must be from the creator, to avoid others' poison.
 * vc issue and cancel opration have no "opid" field, because issue is out-link operation and canceled vcid should be invalid forever.
 * "opid" shouldn't be zero, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used.
-* "attr" field can be extended by the application itself, but there should be some standard fields.
+* "attr" and "ctrl" field can be extended by the application itself, but there is some standard fields, and you'd better add your own prefix to your special field.
 * "time" field should use UTC timestamp, and accurate to seconds.
 * "coid" must be identity global, ((CA_did<<24)|8bit_flag|16bit_number).
 * "vcid" shouldn't be zero, must be identity in the same collection.
