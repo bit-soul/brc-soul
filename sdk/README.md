@@ -1,0 +1,1 @@
+The SDK helps you easily integrate BRC-Soul Protocol into your dapp, and you don't need to deploy the BRC-Soul indexer yourself, but use our official indexer directly.
