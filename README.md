@@ -57,7 +57,7 @@ Why should use the Bitcoin chain?
       "p": "brc-soul",                  //protocol
       "op": "did",                      //create/update did option
       "opid": number,                   //option id, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used
-      "attr": {                         //optional did attributes
+      "attr": {                         //optional did attributes, merge when update
         "name": "did-name",             //optional did name
         "biog": "did-biography",        //optional did biography
         "icon": "ordi://53098586",      //optional did icon, may be stored in ipfs, http, ordi and so on
@@ -95,7 +95,7 @@ Why should use the Bitcoin chain?
 
 **group operations**
 
-    group related operation can be realized by CV related operation, with coid_flag 0x01
+    group related operation can be realized by CV related operation, with coid_mark 0x01
     "vcc"   : group manager create or update group infomation
     "issue" : group manager sign and issue CV to allow user join the group
     "mint"  : user mint the CV as SBT to join the group
@@ -110,8 +110,8 @@ Why should use the Bitcoin chain?
       "p": "brc-soul",
       "op": "vcc",                    //create/update VC collection option
       "opid": number,
-      "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
-      "attr": {                       //optional VC collection attributes
+      "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_mark|16bit_number) 
+      "attr": {                       //optional VC collection attributes, merge when update
         "name": "vc-collection-name", //optional VC collection name
         "desc": "vc-collection-desc", //optional VC collection description
         "icon": "ordi://53098586",    //optional VC collection icon, may be stored in ipfs, http, ordi and so on
@@ -124,17 +124,17 @@ Why should use the Bitcoin chain?
 
     {
       "vc": {
-        "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_flag|16bit_number) 
+        "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_mark|16bit_number) 
         "vcid": number,                 //VC id, should be identity in the same collection
         "flag": number,                 //flag to use by CA itself (optional, default to zero)
         "time": 1706146997,             //sign and issue time, must before mint time (+7200s)
-        "ctrl": {                       //optional VC control
+        "ctrl": {                       //optional VC control, replace when update
           "todid": number,              //optional only allow specified did to mint
           "expire": 1706146997,         //optional expire timestamp seconds from 1970-01-01 00:00:00 UTC
           "limitnum": number,           //optional limit to the first limitnum number minter
           "limitutc": 1706146997,       //optional limit to the minter before the limitutc time
         },
-        "attr": {                       //optional VC attributes
+        "attr": {                       //optional VC attributes, merge when update
           "name": "vc-name",            //optional VC name
           "desc": "vc-desc",            //optional VC description
           "icon": "ordi://53098586",    //optional VC icon, may be stored in ipfs, http, ordi and so on
@@ -215,7 +215,7 @@ Why should use the Bitcoin chain?
 * "opid" shouldn't be zero, should be identity in the same address, to avoid replay attack, timestamp seconds from 1970-01-01 00:00:00 UTC can be used.
 * "attr" and "ctrl" field can be extended by the application itself, but there is some standard fields, and you'd better add your own prefix to your special field.
 * "time" field should use UTC timestamp, and accurate to seconds.
-* "coid" must be identity global, ((CA_did<<24)|8bit_flag|16bit_number).
+* "coid" must be identity global, ((CA_did<<24)|8bit_mark|16bit_number).
 * "vcid" shouldn't be zero, must be identity in the same collection.
 * "coid" and "vcid", together, they ensured the uniqueness of the CV.
 * "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
