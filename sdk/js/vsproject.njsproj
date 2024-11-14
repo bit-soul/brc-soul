@@ -51,10 +51,10 @@ APP_ENV=unittest</Environment>
     <TypeScriptCompile Include="src\config\release.ts" />
     <TypeScriptCompile Include="src\config\unittest.ts" />
     <TypeScriptCompile Include="src\service\did.ts" />
-    <TypeScriptCompile Include="src\utils\tools.ts" />
+    <TypeScriptCompile Include="src\utils\utils.ts" />
     <TypeScriptCompile Include="test\service\did.test.ts" />
     <TypeScriptCompile Include="test\tester.ts" />
-    <TypeScriptCompile Include="test\utils\tools.test.ts" />
+    <TypeScriptCompile Include="test\utils\utils.test.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
