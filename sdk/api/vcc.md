@@ -65,7 +65,7 @@ return [{
 ```
 
 
-## GET /api/batchgrps?vccs=[vcc1,vcc2,...,vccn]&mydid=xxx
+## GET /api/batchvccs?vccs=[vcc1,vcc2,...,vccn]&mydid=xxx
 ```
 get batch collections info
 
