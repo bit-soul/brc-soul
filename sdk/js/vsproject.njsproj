@@ -52,6 +52,7 @@ APP_ENV=unittest</Environment>
     <TypeScriptCompile Include="src\config\unittest.ts" />
     <TypeScriptCompile Include="src\service\did.ts" />
     <TypeScriptCompile Include="src\service\grp.ts" />
+    <TypeScriptCompile Include="src\service\sbt.ts" />
     <TypeScriptCompile Include="src\service\vcc.ts" />
     <TypeScriptCompile Include="src\utils\utils.ts" />
     <TypeScriptCompile Include="test\service\did.test.ts" />
