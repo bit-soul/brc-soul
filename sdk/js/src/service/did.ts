@@ -1,6 +1,6 @@
 import { fetchData } from '../utils/utils';
 
-async function getPersonByDid(did: number) {
+export async function getPersonByDid(did: number) {
   const result = {};
 
   if (!did) {
@@ -14,7 +14,7 @@ async function getPersonByDid(did: number) {
   return json;
 }
 
-async function getPersonByAddr(addr: string) {
+export async function getPersonByAddr(addr: string) {
   const result = {};
 
   if (!addr) {
@@ -28,7 +28,7 @@ async function getPersonByAddr(addr: string) {
   return json;
 }
 
-async function getDid(did: number, mydid: number) {
+export async function getDid(did: number, mydid: number) {
   const result = {};
 
   if (!did) {
@@ -42,7 +42,7 @@ async function getDid(did: number, mydid: number) {
   return json;
 }
 
-async function getDids(mydid: number, size: number, page: number) {
+export async function getDids(mydid: number, size: number, page: number) {
   const result = {};
 
   const url = global.config.brc_soul_api + `/api/dids?mydid=${mydid}&size=${size}&page=${page}`;
@@ -50,7 +50,7 @@ async function getDids(mydid: number, size: number, page: number) {
   return json;
 }
 
-async function getBatchDids(dids: number[], mydid: number) {
+export async function getBatchDids(dids: number[], mydid: number) {
   const result = {};
 
   const unq = [...new Set(dids)];

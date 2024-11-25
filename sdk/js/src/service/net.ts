@@ -1,6 +1,6 @@
 import { fetchData } from '../utils/utils';
 
-async function getFollower(did: number, size: number, page: number) {
+export async function getFollower(did: number, size: number, page: number) {
   const result = {};
 
   if (!did) {
@@ -14,7 +14,7 @@ async function getFollower(did: number, size: number, page: number) {
   return json;
 }
 
-async function getFollowing(did: number, size: number, page: number) {
+export async function getFollowing(did: number, size: number, page: number) {
   const result = {};
 
   if (!did) {
