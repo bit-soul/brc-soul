@@ -1,0 +1,37 @@
+diff --git a/node_modules/bip322-js/dist/helpers/Address.js b/node_modules/bip322-js/dist/helpers/Address.js
+index 36cd40a..98eab9f 100644
+--- a/node_modules/bip322-js/dist/helpers/Address.js
++++ b/node_modules/bip322-js/dist/helpers/Address.js
+@@ -25,6 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
+ Object.defineProperty(exports, "__esModule", { value: true });
+ // Import dependency
+ const bitcoin = __importStar(require("bitcoinjs-lib"));
++const secp256k1 = __importStar(require("secp256k1"));
+ /**
+  * Class that implement address-related utility functions.
+  */
+@@ -188,6 +189,7 @@ class Address {
+                 };
+             case 'p2sh-p2wpkh':
+                 // Reference: https://github.com/bitcoinjs/bitcoinjs-lib/blob/1a9119b53bcea4b83a6aa8b948f0e6370209b1b4/test/integration/addresses.spec.ts#L70
++                publicKey=Buffer.from(secp256k1.publicKeyConvert(publicKey, true));
+                 return {
+                     mainnet: bitcoin.payments.p2sh({
+                         redeem: bitcoin.payments.p2wpkh({ pubkey: publicKey, network: bitcoin.networks.bitcoin }),
+@@ -199,13 +201,15 @@ class Address {
+                     }).address
+                 };
+             case 'p2wpkh':
++                publicKey=Buffer.from(secp256k1.publicKeyConvert(publicKey, true));
+                 return {
+                     mainnet: bitcoin.payments.p2wpkh({ pubkey: publicKey, network: bitcoin.networks.bitcoin }).address,
+                     testnet: bitcoin.payments.p2wpkh({ pubkey: publicKey, network: bitcoin.networks.testnet }).address
+                 };
+             case 'p2tr':
+                 // Convert full-length public key into internal public key if necessary
+-                const internalPubkey = publicKey.byteLength === 33 ? publicKey.subarray(1, 33) : publicKey;
++                //const internalPubkey = publicKey.byteLength === 33 ? publicKey.subarray(1, 33) : publicKey;
++                const internalPubkey = publicKey.subarray(1, 33);
+                 return {
+                     mainnet: bitcoin.payments.p2tr({ internalPubkey: internalPubkey, network: bitcoin.networks.bitcoin }).address,
+                     testnet: bitcoin.payments.p2tr({ internalPubkey: internalPubkey, network: bitcoin.networks.testnet }).address

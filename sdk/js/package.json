@@ -7,6 +7,7 @@
     "bip322-js": "^1.1.0",
     "lodash": "^4.17.21",
     "node-fetch": "^2.7.0",
+    "patch-package": "^8.0.0",
     "socks-proxy-agent": "^8.0.2"
   },
   "devDependencies": {
@@ -34,10 +35,10 @@
   },
   "scripts": {
     "test": "dotenvx -q run --env-file=env/unittest.env -- cross-env NODE_ENV=unittest APP_ENV=unittest jest --runInBand --forceExit --colors",
-    "cov" : "dotenvx -q run --env-file=env/unittest.env -- cross-env NODE_ENV=unittest APP_ENV=unittest jest --runInBand --forceExit --colors --coverage",
-
+    "cov": "dotenvx -q run --env-file=env/unittest.env -- cross-env NODE_ENV=unittest APP_ENV=unittest jest --runInBand --forceExit --colors --coverage",
     "clean": "tsc --build --clean",
     "build": "tsc --build --incremental",
+    "postinstall": "patch-package"
   },
   "author": "anonymous",
   "license": "MIT"
