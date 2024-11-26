@@ -1,8 +1,8 @@
 {
-  "name": "brcsoulsdk",
+  "name": "brcsoul-sdk",
   "version": "0.0.1",
-  "description": "brcsoulsdk",
-  "main": "index.js",
+  "description": "brcsoul-sdk",
+  "main": "dist/index.js",
   "dependencies": {
     "@dotenvx/dotenvx": "^0.24.0",
     "bip322-js": "^1.1.0",
@@ -41,10 +41,21 @@
     "build": "tsc --build --incremental",
     "postinstall": "patch-package"
   },
+  "files": [
+    "dist/",
+    "package.json",
+    "README.md"
+  ],
   "author": "coffeeking001",
-  "keywords": ["brc-soul","bit-soul","brcsoul","bitsoul","bitcoin"],
+  "keywords": [
+    "brc-soul",
+    "bit-soul",
+    "brcsoul",
+    "bitsoul",
+    "bitcoin"
+  ],
   "bugs": "https://github.com/bit-soul/brc-soul/issues",
   "homepage": "https://github.com/bit-soul/brc-soul",
-  "repository": "https://github.com/bit-soul/brc-soul/tree/master/sdk/js",
+  "repository": "https://github.com/bit-soul/brc-soul",
   "license": "MIT"
 }
