@@ -29,6 +29,8 @@ coverage
 *.ntvs*
 *.sw?
 
+!lib/**/*
+
 2-dontupload/**/*
 !1-mustupload/**/*
 !2-dontupload/.gitkeep
