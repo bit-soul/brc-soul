@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import * as bip322 from '../../lib/bip322-js';
+import * as bip322 from 'bip322-js';
 
 export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
