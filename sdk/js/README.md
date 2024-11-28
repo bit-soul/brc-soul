@@ -1,8 +1,11 @@
 # BRC-Soul SDK
 
 ## QuickStart
+```
+npm install brcsoul-sdk --save
 
-## Release
+import * as brcsoul from 'brcsoul-sdk'
+```
 
 ## Development
 
