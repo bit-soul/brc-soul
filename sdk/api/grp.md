@@ -87,7 +87,7 @@ return {
 ```
 
 
-## GET /api/members?vcc=xxx&mydid=xxx&size=xxx&page=xxx
+## GET /api/grpmembers?grp=xxx&mydid=xxx&size=xxx&page=xxx
 ```
 get all members of the group
 
@@ -104,18 +104,6 @@ return {
         follower:  number,  //follower number
         following: number,  //following number
     }, ...]
-}
-```
-
-
-## GET /api/mycoidseq?mydid=xxx
-```
-get the collection sequence number when create collection or group
-
-return {
-    code: number,
-    mess: string,
-    data: number, //collection id sequence
 }
 ```
 
