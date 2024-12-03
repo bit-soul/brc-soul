@@ -39,6 +39,14 @@ export async function getBatchVccs(vccs: number[], mydid: number) {
   return json;
 }
 
+export async function getVccMembers(vcc: number, mydid: number, size: number, page: number) {
+  const result = {};
+
+  const url = global.config.brc_soul_api + `/api/vccmembers?vcc=${vcc}&mydid=${mydid}&size=${size}&page=${page}`;
+  const json: any = await fetchData(url);
+  return json;
+}
+
 export async function getBurnSBT(vcc: number, mydid: number) {
   const result = {};
 

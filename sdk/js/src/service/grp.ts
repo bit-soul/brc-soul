@@ -39,6 +39,14 @@ export async function getBatchGrps(grps: number[], mydid: number) {
   return json;
 }
 
+export async function getGrpMembers(grp: number, mydid: number, size: number, page: number) {
+  const result = {};
+
+  const url = global.config.brc_soul_api + `/api/grpmembers?grp=${grp}&mydid=${mydid}&size=${size}&page=${page}`;
+  const json: any = await fetchData(url);
+  return json;
+}
+
 export async function getLeaveSBT(grp: number, mydid: number) {
   const result = {};
 
