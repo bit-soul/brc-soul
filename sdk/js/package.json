@@ -39,6 +39,7 @@
     "cov": "dotenvx -q run --env-file=env/unittest.env -- cross-env NODE_ENV=unittest APP_ENV=unittest jest --runInBand --forceExit --colors --coverage",
     "clean": "tsc --build --clean",
     "build": "tsc --build --incremental",
+    "publish": "npm run build && npm publish",
     "postinstall": "patch-package"
   },
   "files": [
