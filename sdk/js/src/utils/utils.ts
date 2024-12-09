@@ -117,3 +117,7 @@ export async function fetchData(url, method = 'GET', body: any = null) {
     };
   }
 }
+
+export function updateGlobalBrcSoulApi(base_url) {
+  global.config.brc_soul_api = base_url.replace(/\/$/, '');
+}

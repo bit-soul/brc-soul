@@ -40,4 +40,8 @@ async function getSbt(coid: number, vcid: number, flag: number, time: number, ow
 //misc functions
 async function getMyCoidSeq(mydid: number);
 
+//utils
+function sortObject(obj: Object);
+function checkSign(data: Object, addr: string);
+
 ```
