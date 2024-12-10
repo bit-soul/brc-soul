@@ -31,7 +31,6 @@ APP_ENV=unittest</Environment>
     <Content Include="vsjest.js" />
     <None Include="tsconfig.json" />
     <Content Include="README.md" />
-    <None Include="src\runner.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="1-mustupload" />
