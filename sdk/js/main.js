@@ -11,4 +11,4 @@ default:
   break;
 }
 
-require("./dist/runner.js");
+const brcsoul = require("./dist/index.js");
