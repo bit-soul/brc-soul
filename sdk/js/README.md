@@ -41,7 +41,7 @@ async function getSbt(coid: number, vcid: number, flag: number, time: number, ow
 async function getMyCoidSeq(mydid: number);
 
 //utils
-function sortObject(obj: Object);
+function normalizeMess(obj: Object);
 function checkSign(data: Object, addr: string);
 
 ```

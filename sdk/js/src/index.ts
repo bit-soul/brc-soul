@@ -3,7 +3,7 @@ global.config = require('./config/release');
 
 export { SbtState } from './interface';
 
-export { sortObject, checkSign, updateGlobalBrcSoulApi } from './utils/utils';
+export { normalizeMess, checkSign, updateGlobalBrcSoulApi } from './utils/utils';
 export { getPersonByDid, getPersonByAddr, getDid, getDids, getBatchDids } from './service/did';
 export { getGrp, getGrps, getMyGrps, getBatchGrps, getGrpMembers, getLeaveSBT } from './service/grp';
 export { getFollower, getFollowing } from './service/net';

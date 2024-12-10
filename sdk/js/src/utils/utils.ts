@@ -36,7 +36,7 @@ export function deepCopy(obj) {
   return temp;
 }
 
-export function sortObject(obj) {
+export function sortObject(obj: Object) {
   //Recursively sort each value in the dictionary and sort by keys
   if (Array.isArray(obj)) {
     return obj.map(sortObject);
@@ -57,7 +57,11 @@ export function sortObject(obj) {
   return obj;
 }
 
-export function checkSign(data, addr) {
+export function normalizeMess(obj: Object) {
+  return JSON.stringify(sortObject(obj));
+}
+
+export function checkSign(data: Object, addr: string) {
   if (!data || !data['sign']) {
     return false;
   }
@@ -118,6 +122,6 @@ export async function fetchData(url, method = 'GET', body: any = null) {
   }
 }
 
-export function updateGlobalBrcSoulApi(base_url) {
+export function updateGlobalBrcSoulApi(base_url: string) {
   global.config.brc_soul_api = base_url.replace(/\/$/, '');
 }
