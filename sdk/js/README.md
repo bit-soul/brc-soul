@@ -43,6 +43,7 @@ async function getMyCoidSeq(mydid: number);
 //utils
 function normalizeMess(obj: Object);
 function checkSign(data: Object, addr: string);
-function updateGlobalBrcSoulApi(base_url: string);
+function updateGlobalBrcSoulApi(api_base_url: string);
+function setGlobalProxyAgent(socks_proxy_url: string);
 
 ```

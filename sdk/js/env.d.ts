@@ -5,6 +5,7 @@ declare global {
     interface Global {
       env: string;
       config: any;
+      agent: any;
     }
   }
 }

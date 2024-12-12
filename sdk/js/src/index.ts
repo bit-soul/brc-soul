@@ -1,5 +1,6 @@
 //choose config file when first time require
 if (!global.env || !global.config) {
+  global.agent = null;
   switch (process.env.APP_ENV) {
     case 'release':
       global.env = 'release';
@@ -18,7 +19,7 @@ if (!global.env || !global.config) {
 
 export { SbtState } from './interface';
 
-export { normalizeMess, checkSign, updateGlobalBrcSoulApi } from './utils/utils';
+export { normalizeMess, checkSign, updateGlobalBrcSoulApi, setGlobalProxyAgent } from './utils/utils';
 export { getPersonByDid, getPersonByAddr, getDid, getDids, getBatchDids } from './service/did';
 export { getGrp, getGrps, getMyGrps, getBatchGrps, getGrpMembers, getLeaveSBT } from './service/grp';
 export { getFollower, getFollowing } from './service/net';
