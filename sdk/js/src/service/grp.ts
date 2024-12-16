@@ -9,7 +9,7 @@ export async function getGrp(grp: number, mydid: number = 0) {
     return result;
   }
 
-  const url = global.config.brc_soul_api + `/api/grp/${grp}?mydid=${mydid}`;
+  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/grp/${grp}?mydid=${mydid}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -23,7 +23,7 @@ export async function getGrps(mydid: number = 0, size: number = 10, page: number
     return result;
   }
 
-  const url = global.config.brc_soul_api + `/api/grps?mydid=${mydid}&size=${size}&page=${page}`;
+  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/grps?mydid=${mydid}&size=${size}&page=${page}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -43,7 +43,7 @@ export async function getMyGrps(mydid: number, size: number = 10, page: number =
     return result;
   }
 
-  const url = global.config.brc_soul_api + `/api/mygrps?mydid=${mydid}&size=${size}&page=${page}`;
+  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/mygrps?mydid=${mydid}&size=${size}&page=${page}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -58,7 +58,7 @@ export async function getBatchGrps(grps: number[], mydid: number = 0) {
   }
 
   const unq = [...new Set(grps)];
-  const url = global.config.brc_soul_api + `/api/batchgrps?grps=[${unq}]&mydid=${mydid}`;
+  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/batchgrps?grps=[${unq}]&mydid=${mydid}`;
   const json: any = await fetchData(url);
 
   return json;
@@ -79,7 +79,7 @@ export async function getGrpMembers(grp: number, mydid: number = 0, size: number
     return result;
   }
 
-  const url = global.config.brc_soul_api + `/api/grpmembers?grp=${grp}&mydid=${mydid}&size=${size}&page=${page}`;
+  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/grpmembers?grp=${grp}&mydid=${mydid}&size=${size}&page=${page}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -93,7 +93,7 @@ export async function getLeaveSBT(grp: number, mydid: number) {
     return result;
   }
 
-  const url = global.config.brc_soul_api + `/api/leavesbt?grp=${grp}&mydid=${mydid}`;
+  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/leavesbt?grp=${grp}&mydid=${mydid}`;
   const json: any = await fetchData(url);
   return json;
 }

@@ -9,7 +9,7 @@ export async function getMyCoidSeq(mydid: number) {
     return result;
   }
 
-  const url = global.config.brc_soul_api + `/api/mycoidseq?mydid=${mydid}`;
+  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/mycoidseq?mydid=${mydid}`;
   const json: any = await fetchData(url);
   return json;
 }

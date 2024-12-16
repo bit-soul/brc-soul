@@ -96,7 +96,7 @@ export async function fetchWithTimeout(
 export async function fetchData(url, method = 'GET', body: any = null) {
   try {
     const options: any = {
-      agent: global.agent,
+      agent: global.brcsoul_sdk_agent,
       method: method.toUpperCase(),
       headers: {
         'Content-Type': 'application/json',
@@ -125,14 +125,14 @@ export async function fetchData(url, method = 'GET', body: any = null) {
 }
 
 export function updateGlobalBrcSoulApi(api_base_url: string) {
-  global.config.brc_soul_api = api_base_url.replace(/\/$/, '');
+  global.brcsoul_sdk_config.brc_soul_api = api_base_url.replace(/\/$/, '');
 }
 
 //[ 'socks', 'socks4', 'socks4a', 'socks5', 'socks5h' ]
 export function setGlobalProxyAgent(socks_proxy_url: string) {
   try {
-    global.agent = new proxyagent.SocksProxyAgent(socks_proxy_url);
+    global.brcsoul_sdk_agent = new proxyagent.SocksProxyAgent(socks_proxy_url);
   } catch (e) {
-    global.agent = null;
+    global.brcsoul_sdk_agent = null;
   }
 }

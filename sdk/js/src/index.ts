@@ -1,18 +1,18 @@
 //choose config file when first time require
-if (!global.env || !global.config) {
-  global.agent = null;
+if (!global.brcsoul_sdk_env || !global.brcsoul_sdk_config) {
+  global.brcsoul_sdk_agent = null;
   switch (process.env.APP_ENV) {
     case 'release':
-      global.env = 'release';
-      global.config = require('./config/release');
+      global.brcsoul_sdk_env = 'release';
+      global.brcsoul_sdk_config = require('./config/release');
       break;
     case 'unittest':
-      global.env = 'unittest';
-      global.config = require('./config/unittest');
+      global.brcsoul_sdk_env = 'unittest';
+      global.brcsoul_sdk_config = require('./config/unittest');
       break;
     default:
-      global.env = 'release';
-      global.config = require('./config/release');
+      global.brcsoul_sdk_env = 'release';
+      global.brcsoul_sdk_config = require('./config/release');
       break;
   }
 }

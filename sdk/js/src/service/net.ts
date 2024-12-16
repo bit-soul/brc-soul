@@ -15,7 +15,7 @@ export async function getFollower(did: number, size: number = 10, page: number =
     return result;
   }
 
-  const url = global.config.brc_soul_api + `/api/follower?did=${did}`;
+  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/follower?did=${did}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -35,7 +35,7 @@ export async function getFollowing(did: number, size: number = 10, page: number 
     return result;
   }
 
-  const url = global.config.brc_soul_api + `/api/following?did=${did}`;
+  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/following?did=${did}`;
   const json: any = await fetchData(url);
   return json;
 }
