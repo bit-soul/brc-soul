@@ -2,7 +2,11 @@
 const sdkglb = require('./global');
 if (!sdkglb.env || !sdkglb.config) {
   sdkglb.agent = null;
-  switch (process.env.APP_ENV) {
+  switch (typeof process === 'undefined' ? 'browser' : process.env.APP_ENV) {
+    case 'browser':
+      sdkglb.env = 'browser';
+      sdkglb.config = require('./config/browser');
+      break;
     case 'release':
       sdkglb.env = 'release';
       sdkglb.config = require('./config/release');
@@ -20,7 +24,6 @@ if (!sdkglb.env || !sdkglb.config) {
 
 export { SbtState } from './interface';
 
-export { normalizeMess, checkSign, updateGlobalBrcSoulApi, setGlobalProxyAgent } from './utils/utils';
 export { getPersonByDid, getPersonByAddr, getDid, getDids, getBatchDids } from './service/did';
 export { getGrp, getGrps, getMyGrps, getBatchGrps, getGrpMembers, getLeaveSBT } from './service/grp';
 export { getFollower, getFollowing } from './service/net';

@@ -1,5 +1,8 @@
 const dotenvx = require('@dotenvx/dotenvx');
-switch(process.env.APP_ENV) {
+switch(typeof process === 'undefined' ? 'browser' : process.env.APP_ENV) {
+case 'browser':
+  dotenvx.config({path:'./env/browser.env'});
+  break;
 case 'release':
   dotenvx.config({path:'./env/release.env'});
   break;

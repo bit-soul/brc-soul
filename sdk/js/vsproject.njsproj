@@ -47,6 +47,7 @@ APP_ENV=unittest</Environment>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="env.d.ts" />
+    <TypeScriptCompile Include="src\config\browser.ts" />
     <TypeScriptCompile Include="src\config\release.ts" />
     <TypeScriptCompile Include="src\config\unittest.ts" />
     <TypeScriptCompile Include="src\global.ts" />

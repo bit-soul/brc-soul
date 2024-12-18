@@ -1,6 +1,11 @@
-import fetch from 'node-fetch';
-import * as bip322 from 'bip322-js';
-import * as proxyagent from 'socks-proxy-agent';
+let fetch = null;
+let bip322 = null;
+let proxyagent = null;
+if (typeof process !== 'undefined') {
+  fetch = require('node-fetch');
+  bip322 = require('bip322-js');
+  proxyagent = require('socks-proxy-agent');
+}
 
 const sdkglb = require('../global');
 
@@ -65,6 +70,10 @@ export function normalizeMess(obj: Object) {
 }
 
 export function checkSign(data: Object, addr: string) {
+  if (!bip322) {
+    return false;
+  }
+
   if (!data || !data['sign']) {
     return false;
   }
@@ -81,12 +90,12 @@ export function checkSign(data: Object, addr: string) {
   }
 }
 
-export async function fetchWithTimeout(
-  url: string,
-  options: fetch.RequestInit = {},
-  timeout: number = 15000,
-): Promise<fetch.Response> {
-  const timeoutPromise = new Promise<fetch.Response>((_, reject) => {
+export async function fetchWithTimeout(url: string, options: any = {}, timeout: number = 15000) {
+  if (!fetch) {
+    throw new Error('fetchData can not be used in browser.');
+  }
+
+  const timeoutPromise = new Promise((_, reject) => {
     setTimeout(() => {
       reject(new Error('Request timed out: ' + url));
     }, timeout);
@@ -96,6 +105,13 @@ export async function fetchWithTimeout(
 }
 
 export async function fetchData(url, method = 'GET', body: any = null) {
+  if (!fetch) {
+    return {
+      code: -999,
+      mess: 'fetchData can not be used in browser.',
+    };
+  }
+
   try {
     const options: any = {
       agent: sdkglb.agent,
@@ -132,6 +148,11 @@ export function updateGlobalBrcSoulApi(api_base_url: string) {
 
 //[ 'socks', 'socks4', 'socks4a', 'socks5', 'socks5h' ]
 export function setGlobalProxyAgent(socks_proxy_url: string) {
+  if (!proxyagent) {
+    sdkglb.agent = null;
+    return;
+  }
+
   try {
     sdkglb.agent = new proxyagent.SocksProxyAgent(socks_proxy_url);
   } catch (e) {
