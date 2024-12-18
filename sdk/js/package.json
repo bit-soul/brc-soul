@@ -34,9 +34,9 @@
     "node": ">=12.0.0"
   },
   "scripts": {
-    "local": "cross-env NODE_ENV=release APP_ENV=release node main.js",
-    "test": "dotenvx -q run --env-file=env/unittest.env -- cross-env NODE_ENV=unittest APP_ENV=unittest jest --runInBand --forceExit --colors",
-    "cov": "dotenvx -q run --env-file=env/unittest.env -- cross-env NODE_ENV=unittest APP_ENV=unittest jest --runInBand --forceExit --colors --coverage",
+    "local": "cross-env NODE_ENV=release BRCSOUL_SDK_ENV=release node main.js",
+    "test": "dotenvx -q run --env-file=env/unittest.env -- cross-env NODE_ENV=unittest BRCSOUL_SDK_ENV=unittest jest --runInBand --forceExit --colors",
+    "cov": "dotenvx -q run --env-file=env/unittest.env -- cross-env NODE_ENV=unittest BRCSOUL_SDK_ENV=unittest jest --runInBand --forceExit --colors --coverage",
     "clean": "tsc --build --clean",
     "build": "tsc --build --incremental",
     "postinstall": "patch-package"

@@ -2,7 +2,7 @@
 const sdkglb = require('./global');
 if (!sdkglb.env || !sdkglb.config) {
   sdkglb.agent = null;
-  switch (typeof process === 'undefined' ? 'browser' : process.env.APP_ENV) {
+  switch (typeof process === 'undefined' ? 'browser' : process.env.BRCSOUL_SDK_ENV) {
     case 'browser':
       sdkglb.env = 'browser';
       sdkglb.config = require('./config/browser');

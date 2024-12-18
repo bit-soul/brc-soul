@@ -1,5 +1,5 @@
 const dotenvx = require('@dotenvx/dotenvx');
-switch(typeof process === 'undefined' ? 'browser' : process.env.APP_ENV) {
+switch(typeof process === 'undefined' ? 'browser' : process.env.BRCSOUL_SDK_ENV) {
 case 'browser':
   dotenvx.config({path:'./env/browser.env'});
   break;
