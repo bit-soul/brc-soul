@@ -1,5 +1,7 @@
 import { fetchData } from '../utils/utils';
 
+const sdkglb = require('../global');
+
 export async function getPersonByDid(did: number) {
   const result = {};
 
@@ -9,7 +11,7 @@ export async function getPersonByDid(did: number) {
     return result;
   }
 
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/personbydid?did=${did}`;
+  const url = sdkglb.config.brc_soul_api + `/api/personbydid?did=${did}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -23,7 +25,7 @@ export async function getPersonByAddr(addr: string) {
     return result;
   }
 
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/personbyaddr?addr=${addr}`;
+  const url = sdkglb.config.brc_soul_api + `/api/personbyaddr?addr=${addr}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -37,7 +39,7 @@ export async function getDid(did: number, mydid: number = 0) {
     return result;
   }
 
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/did/${did}?mydid=${mydid}`;
+  const url = sdkglb.config.brc_soul_api + `/api/did/${did}?mydid=${mydid}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -51,7 +53,7 @@ export async function getDids(mydid: number = 0, size: number = 10, page: number
     return result;
   }
 
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/dids?mydid=${mydid}&size=${size}&page=${page}`;
+  const url = sdkglb.config.brc_soul_api + `/api/dids?mydid=${mydid}&size=${size}&page=${page}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -66,7 +68,7 @@ export async function getBatchDids(dids: number[], mydid: number = 0) {
   }
 
   const unq = [...new Set(dids)];
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/batchdids?dids=[${unq}]&mydid=${mydid}`;
+  const url = sdkglb.config.brc_soul_api + `/api/batchdids?dids=[${unq}]&mydid=${mydid}`;
   const json: any = await fetchData(url);
   return json;
 }

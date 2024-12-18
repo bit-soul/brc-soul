@@ -2,6 +2,8 @@ import fetch from 'node-fetch';
 import * as bip322 from 'bip322-js';
 import * as proxyagent from 'socks-proxy-agent';
 
+const sdkglb = require('../global');
+
 export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -96,7 +98,7 @@ export async function fetchWithTimeout(
 export async function fetchData(url, method = 'GET', body: any = null) {
   try {
     const options: any = {
-      agent: global.brcsoul_sdk_agent,
+      agent: sdkglb.agent,
       method: method.toUpperCase(),
       headers: {
         'Content-Type': 'application/json',
@@ -125,14 +127,14 @@ export async function fetchData(url, method = 'GET', body: any = null) {
 }
 
 export function updateGlobalBrcSoulApi(api_base_url: string) {
-  global.brcsoul_sdk_config.brc_soul_api = api_base_url.replace(/\/$/, '');
+  sdkglb.config.brc_soul_api = api_base_url.replace(/\/$/, '');
 }
 
 //[ 'socks', 'socks4', 'socks4a', 'socks5', 'socks5h' ]
 export function setGlobalProxyAgent(socks_proxy_url: string) {
   try {
-    global.brcsoul_sdk_agent = new proxyagent.SocksProxyAgent(socks_proxy_url);
+    sdkglb.agent = new proxyagent.SocksProxyAgent(socks_proxy_url);
   } catch (e) {
-    global.brcsoul_sdk_agent = null;
+    sdkglb.agent = null;
   }
 }

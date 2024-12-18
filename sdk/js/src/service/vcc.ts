@@ -1,5 +1,7 @@
 import { fetchData } from '../utils/utils';
 
+const sdkglb = require('../global');
+
 export async function getVcc(vcc: number, mydid: number = 0) {
   const result = {};
 
@@ -9,7 +11,7 @@ export async function getVcc(vcc: number, mydid: number = 0) {
     return result;
   }
 
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/vcc/${vcc}?mydid=${mydid}`;
+  const url = sdkglb.config.brc_soul_api + `/api/vcc/${vcc}?mydid=${mydid}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -23,7 +25,7 @@ export async function getVccs(mydid: number = 0, size: number = 10, page: number
     return result;
   }
 
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/vccs?mydid=${mydid}&size=${size}&page=${page}`;
+  const url = sdkglb.config.brc_soul_api + `/api/vccs?mydid=${mydid}&size=${size}&page=${page}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -43,7 +45,7 @@ export async function getMyVccs(mydid: number, size: number = 10, page: number =
     return result;
   }
 
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/myvccs?mydid=${mydid}&size=${size}&page=${page}`;
+  const url = sdkglb.config.brc_soul_api + `/api/myvccs?mydid=${mydid}&size=${size}&page=${page}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -58,7 +60,7 @@ export async function getBatchVccs(vccs: number[], mydid: number = 0) {
   }
 
   const unq = [...new Set(vccs)];
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/batchvccs?vccs=[${unq}]&mydid=${mydid}`;
+  const url = sdkglb.config.brc_soul_api + `/api/batchvccs?vccs=[${unq}]&mydid=${mydid}`;
   const json: any = await fetchData(url);
 
   return json;
@@ -79,7 +81,7 @@ export async function getVccMembers(vcc: number, mydid: number = 0, size: number
     return result;
   }
 
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/vccmembers?vcc=${vcc}&mydid=${mydid}&size=${size}&page=${page}`;
+  const url = sdkglb.config.brc_soul_api + `/api/vccmembers?vcc=${vcc}&mydid=${mydid}&size=${size}&page=${page}`;
   const json: any = await fetchData(url);
   return json;
 }
@@ -93,7 +95,7 @@ export async function getBurnSBT(vcc: number, mydid: number) {
     return result;
   }
 
-  const url = global.brcsoul_sdk_config.brc_soul_api + `/api/burnsbt?vcc=${vcc}&mydid=${mydid}`;
+  const url = sdkglb.config.brc_soul_api + `/api/burnsbt?vcc=${vcc}&mydid=${mydid}`;
   const json: any = await fetchData(url);
   return json;
 }
