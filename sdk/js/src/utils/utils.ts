@@ -69,6 +69,14 @@ export function sortObject(obj: Object) {
   return obj;
 }
 
+export function concateCoid(mydid: number, coid_seq: number, is_group: boolean) {
+  if (is_group) {
+    return (mydid << 24) | (0x01 << 16) | (coid_seq & 0xffff);
+  } else {
+    return (mydid << 24) | (0x00 << 16) | (coid_seq & 0xffff);
+  }
+}
+
 export function normalizeMess(obj: Object) {
   return JSON.stringify(sortObject(obj));
 }
