@@ -9,8 +9,43 @@ import * as brcsoul from 'brcsoul-sdk'
 
 ## Development
 
+## Enum Value
+```
+enum SbtState {
+  NOTMINT  = 1,
+  MINTED   = 2,
+  BURNED   = 3,
+  CANCELED = 4,
+}
+
+export const enum BurnType {
+  BURN_TYPE_COID = 1,
+  BURN_TYPE_VCID = 2,
+  BURN_TYPE_FLAG = 3,
+  BURN_TYPE_TIME = 4,
+  BURN_TYPE_FLAG_AND_TIME = 5,
+}
+
+export const enum CancelType {
+  CANCEL_TYPE_VCID = 2,
+  CANCEL_TYPE_FLAG = 3,
+  CANCEL_TYPE_TIME = 4,
+  CANCEL_TYPE_FLAG_AND_TIME = 5,
+}
+
+```
+
 ## Interface
 ```
+//options
+function opDid(attr: Object);
+function opNet(fol: number[], unf: number[]);
+function opVcc(coid: number, attr: Object);
+function opIssue(coid: number, vcid: number, flag: number|null, time: number, ctrl: Object|null, attr: Object|null);
+function opCancel(vcs: Object);
+function opMint(vc: Object);
+function opBurn(vcs: Object);
+
 //did (decentralized identifier)
 async function getPersonByDid(did: number);
 async function getPersonByAddr(addr: string);
@@ -49,5 +84,6 @@ function normalizeMess(obj: Object);
 function checkSign(data: Object, addr: string);
 function updateGlobalBrcSoulApi(api_base_url: string);
 function setGlobalProxyAgent(socks_proxy_url: string);
+function concateCoid(mydid: number, coid_seq: number, is_group: boolean);
 
 ```

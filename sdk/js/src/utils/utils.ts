@@ -48,6 +48,28 @@ export function deepCopy(obj) {
   return temp;
 }
 
+export function isNull(obj) {
+  return Object.prototype.toString.call(obj) === '[object Null]';
+}
+export function isNumber(obj) {
+  return Object.prototype.toString.call(obj) === '[object Number]';
+}
+export function isString(obj) {
+  return Object.prototype.toString.call(obj) === '[object String]';
+}
+export function isBoolean(obj) {
+  return Object.prototype.toString.call(obj) === '[object Boolean]';
+}
+export function isFunction(obj) {
+  return Object.prototype.toString.call(obj) === '[object Function]';
+}
+export function isObject(obj) {
+  return Object.prototype.toString.call(obj) === '[object Object]';
+}
+export function isArray(obj) {
+  return Object.prototype.toString.call(obj) === '[object Array]';
+}
+
 export function sortObject(obj: Object) {
   //Recursively sort each value in the dictionary and sort by keys
   if (Array.isArray(obj)) {
@@ -100,6 +122,53 @@ export function checkSign(data: Object, addr: string) {
   } catch (e) {
     return false;
   }
+}
+
+export function validateVcsItem(vcs_item: (number | number[])[]) {
+  const type = vcs_item[0];
+  const time = Math.round(Date.now() / 1000);
+  switch (type) {
+    case 1: //delete_sbt_by_coid
+      if (vcs_item.length !== 2) {
+        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      }
+      break;
+    case 2: //delete_sbt_by_vcid
+      if (vcs_item.length !== 3 || isArray(vcs_item[2])) {
+        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      }
+      //@ts-ignore
+      for (const vcid of vcs_item[2]) {
+        if (!isNumber(vcid)) {
+          return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+        }
+      }
+      break;
+    case 3: //delete_sbt_by_flag
+      if (vcs_item.length !== 3 || !isNumber(vcs_item[2])) {
+        return'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      }
+      break;
+    case 4: //delete_sbt_by_time
+      if (vcs_item.length !== 4 || !isNumber(vcs_item[2]) || !isNumber(vcs_item[3])) {
+        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      }
+      if (!(vcs_item[2] >= 0 && vcs_item[3] >= 0 && vcs_item[2] <= vcs_item[3] && vcs_item[3] <= time + 7200)) {
+        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      }
+      break;
+    case 5: //delete_sbt_by_flag_and_time
+      if (vcs_item.length !== 5 || !isNumber(vcs_item[2]) || !isNumber(vcs_item[3]) || !isNumber(vcs_item[4])) {
+        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      }
+      if (!(vcs_item[3] >= 0 && vcs_item[4] >= 0 && vcs_item[3] <= vcs_item[4] && vcs_item[4] <= time + 7200)) {
+        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      }
+      break;
+    default:
+      return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+  }
+  return null;
 }
 
 export async function fetchWithTimeout(url: string, options: any = {}, timeout: number = 15000) {

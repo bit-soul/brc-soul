@@ -22,7 +22,7 @@ if (!sdkglb.env || !sdkglb.config) {
   }
 }
 
-export { SbtState } from './interface';
+export { SbtState, BurnType, CancelType } from './interface';
 
 export { concateCoid, normalizeMess, checkSign, updateGlobalBrcSoulApi, setGlobalProxyAgent } from './utils/utils';
 
