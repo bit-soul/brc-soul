@@ -26,7 +26,7 @@ export { SbtState, BurnType, CancelType } from './interface';
 
 export { concateCoid, normalizeMess, checkSign, updateGlobalBrcSoulApi, setGlobalProxyAgent } from './utils/utils';
 
-export { opDid, opNet, opVcc, opIssue, opCancel, opMint, opBurn} from './option/option';
+export { opDid, opNet, opVcc, opIssue, opCancel, opMint, opBurn } from './option/option';
 
 export { getPersonByDid, getPersonByAddr, getDid, getDids, getBatchDids } from './service/did';
 export { getGrp, getGrps, getMyGrps, getBatchGrps, getGrpMembers, getLeaveSBT } from './service/grp';

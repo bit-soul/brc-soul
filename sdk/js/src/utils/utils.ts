@@ -13,41 +13,30 @@ if (typeof window !== 'undefined') {
 
 const sdkglb = require('../global');
 
-export async function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+/*********************************************************
+ * config sdk api
+ *********************************************************/
+export function updateGlobalBrcSoulApi(api_base_url: string) {
+  sdkglb.config.brc_soul_api = api_base_url.replace(/\/$/, '');
 }
 
-export async function retryTimes(fun: Function, times: number, interval: number) {
-  let last_error;
-
-  for (let retry_cnt = 0; retry_cnt < times; ++retry_cnt) {
-    try {
-      return await fun();
-    } catch (error) {
-      await sleep(interval);
-      last_error = error;
-    }
+//[ 'socks', 'socks4', 'socks4a', 'socks5', 'socks5h' ]
+export function setGlobalProxyAgent(socks_proxy_url: string) {
+  if (!proxyagent) {
+    sdkglb.agent = null;
+    return;
   }
 
-  throw last_error;
+  try {
+    sdkglb.agent = new proxyagent.SocksProxyAgent(socks_proxy_url);
+  } catch (e) {
+    sdkglb.agent = null;
+  }
 }
 
-export function deepCopy(obj) {
-  if (obj === null || typeof obj !== 'object') {
-    return obj;
-  }
-
-  // give temp the original obj's constructor
-  const temp = obj.constructor();
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      temp[key] = deepCopy(obj[key]);
-    }
-  }
-
-  return temp;
-}
-
+/*********************************************************
+ * some lodash utils
+ *********************************************************/
 export function isNull(obj) {
   return Object.prototype.toString.call(obj) === '[object Null]';
 }
@@ -60,16 +49,38 @@ export function isString(obj) {
 export function isBoolean(obj) {
   return Object.prototype.toString.call(obj) === '[object Boolean]';
 }
-export function isFunction(obj) {
-  return Object.prototype.toString.call(obj) === '[object Function]';
-}
 export function isObject(obj) {
   return Object.prototype.toString.call(obj) === '[object Object]';
+}
+export function isFunction(obj) {
+  return Object.prototype.toString.call(obj) === '[object Function]';
 }
 export function isArray(obj) {
   return Object.prototype.toString.call(obj) === '[object Array]';
 }
 
+export function isEqual(obj1, obj2) {
+  if (Object.keys(obj1).length !== Object.keys(obj2).length) {
+    return false;
+  }
+
+  for (const key in obj1) {
+    if (obj1.hasOwnProperty(key)) {
+      if (!obj2.hasOwnProperty(key)) return false;
+      if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+        if (!isEqual(obj1[key], obj2[key])) return false;
+      } else if (obj1[key] !== obj2[key]) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+/*********************************************************
+ * brcsoul protocol utils
+ *********************************************************/
 export function sortObject(obj: object) {
   //Recursively sort each value in the dictionary and sort by keys
   if (Array.isArray(obj)) {
@@ -91,12 +102,45 @@ export function sortObject(obj: object) {
   return obj;
 }
 
-export function concateCoid(mydid: number, coid_seq: number, is_group: boolean) {
-  if (is_group) {
-    return (mydid << 24) | (0x01 << 16) | (coid_seq & 0xffff);
-  } else {
-    return (mydid << 24) | (0x00 << 16) | (coid_seq & 0xffff);
+export function deepCopy(obj) {
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
   }
+
+  // give temp the original obj's constructor
+  const temp = obj.constructor();
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      temp[key] = deepCopy(obj[key]);
+    }
+  }
+
+  return temp;
+}
+
+export function merge_attr(des_attr, new_attr) {
+  let res_attr = null;
+
+  if (isObject(new_attr)) {
+    if (isObject(des_attr)) {
+      res_attr = Object.assign(des_attr, new_attr); //modify attr
+    } else {
+      res_attr = new_attr; //assign to attr directly
+    }
+  } else {
+    if (isObject(des_attr)) {
+      if (new_attr === null) {
+        res_attr = null; //delete all attr
+      } else {
+        //data.attr may be undefined or invalid, allow use it to update the timestamp
+        res_attr = des_attr;
+      }
+    } else {
+      res_attr = null;
+    }
+  }
+
+  return res_attr;
 }
 
 export function normalizeMess(obj: object) {
@@ -124,6 +168,27 @@ export function checkSign(data: object, addr: string) {
   }
 }
 
+export function parseData(data_str) {
+  try {
+    const json = JSON.parse(data_str);
+    if (!json['p'] || json['p'] !== 'brc-soul') {
+      return null;
+    } else {
+      return json;
+    }
+  } catch (e) {
+    return null;
+  }
+}
+
+export function concateCoid(mydid: number, coid_seq: number, is_group: boolean) {
+  if (is_group) {
+    return (mydid << 24) | (0x01 << 16) | (coid_seq & 0xffff);
+  } else {
+    return (mydid << 24) | (0x00 << 16) | (coid_seq & 0xffff);
+  }
+}
+
 export function validateVcsItem(vcs_item: (number | number[])[]) {
   const type = vcs_item[0];
   const time = Math.round(Date.now() / 1000);
@@ -146,7 +211,7 @@ export function validateVcsItem(vcs_item: (number | number[])[]) {
       break;
     case 3: //delete_sbt_by_flag
       if (vcs_item.length !== 3 || !isNumber(vcs_item[2])) {
-        return'vcs not valid in data: ' + JSON.stringify(vcs_item);
+        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
       }
       break;
     case 4: //delete_sbt_by_time
@@ -169,6 +234,28 @@ export function validateVcsItem(vcs_item: (number | number[])[]) {
       return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
   }
   return null;
+}
+
+/*********************************************************
+ * network utils
+ *********************************************************/
+export async function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export async function retryTimes(fun: Function, times: number, interval: number) {
+  let last_error;
+
+  for (let retry_cnt = 0; retry_cnt < times; ++retry_cnt) {
+    try {
+      return await fun();
+    } catch (error) {
+      await sleep(interval);
+      last_error = error;
+    }
+  }
+
+  throw last_error;
 }
 
 export async function fetchWithTimeout(url: string, options: any = {}, timeout: number = 15000) {
@@ -209,23 +296,5 @@ export async function fetchData(url, method = 'GET', body: any = null) {
       code: -999,
       mess: err.toString(),
     };
-  }
-}
-
-export function updateGlobalBrcSoulApi(api_base_url: string) {
-  sdkglb.config.brc_soul_api = api_base_url.replace(/\/$/, '');
-}
-
-//[ 'socks', 'socks4', 'socks4a', 'socks5', 'socks5h' ]
-export function setGlobalProxyAgent(socks_proxy_url: string) {
-  if (!proxyagent) {
-    sdkglb.agent = null;
-    return;
-  }
-
-  try {
-    sdkglb.agent = new proxyagent.SocksProxyAgent(socks_proxy_url);
-  } catch (e) {
-    sdkglb.agent = null;
   }
 }
