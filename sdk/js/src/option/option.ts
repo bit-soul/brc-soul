@@ -2,7 +2,7 @@ import { validateVcsItem } from '../utils/utils';
 
 const sdkglb = require('../global');
 
-export function opDid(attr: Object) {
+export function opDid(attr: object) {
   const op_time = Math.round(Date.now() / 1000);
   const option = {
     p: 'brc-soul',
@@ -28,7 +28,7 @@ export function opNet(fol: number[], unf: number[]) {
   return option;
 }
 
-export function opVcc(coid: number, attr: Object) {
+export function opVcc(coid: number, attr: object) {
   const op_time = Math.round(Date.now() / 1000);
   const option = {
     p: 'brc-soul',
@@ -45,8 +45,8 @@ export function opIssue(
   vcid: number,
   flag: number | null,
   time: number,
-  ctrl: Object | null,
-  attr: Object | null,
+  ctrl: object | null,
+  attr: object | null,
 ) {
   const vc = {};
   vc['coid'] = coid;
@@ -58,7 +58,7 @@ export function opIssue(
   return vc;
 }
 
-export function opCancel(vcs) {
+export function opCancel(vcs: (number | number[])[][]) {
   const option = {
     p: 'brc-soul',
     op: 'cancel',
@@ -75,7 +75,7 @@ export function opCancel(vcs) {
   return option;
 }
 
-export function opMint(vc: Object) {
+export function opMint(vc: object) {
   const op_time = Math.round(Date.now() / 1000);
   const option = {
     p: 'brc-soul',
@@ -92,7 +92,7 @@ export function opMint(vc: Object) {
   return option;
 }
 
-export function opBurn(vcs) {
+export function opBurn(vcs: (number | number[])[][]) {
   const op_time = Math.round(Date.now() / 1000);
   const option = {
     p: 'brc-soul',

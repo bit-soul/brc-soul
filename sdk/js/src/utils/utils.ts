@@ -70,7 +70,7 @@ export function isArray(obj) {
   return Object.prototype.toString.call(obj) === '[object Array]';
 }
 
-export function sortObject(obj: Object) {
+export function sortObject(obj: object) {
   //Recursively sort each value in the dictionary and sort by keys
   if (Array.isArray(obj)) {
     return obj.map(sortObject);
@@ -99,11 +99,11 @@ export function concateCoid(mydid: number, coid_seq: number, is_group: boolean) 
   }
 }
 
-export function normalizeMess(obj: Object) {
+export function normalizeMess(obj: object) {
   return JSON.stringify(sortObject(obj));
 }
 
-export function checkSign(data: Object, addr: string) {
+export function checkSign(data: object, addr: string) {
   if (!bip322) {
     return false;
   }
