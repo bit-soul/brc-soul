@@ -126,7 +126,7 @@ Why should use the Bitcoin chain?
       "vc": {
         "coid": number,                 //VC collection id, should be identity global, ((CA_did<<24)|8bit_mark|16bit_number) 
         "vcid": number,                 //VC id, should be identity in the same collection
-        "flag": number,                 //flag to use by CA itself (optional, default to zero)
+        "flag": number,                 //flag to use by CA itself (optional, but not null, default to zero)
         "time": 1706146997,             //sign and issue time, must before mint time (+7200s)
         "ctrl": {                       //optional VC control, replace when update
           "todid": number,              //optional only allow specified did to mint
