@@ -18,7 +18,7 @@ enum SbtState {
   CANCELED = 4,
 }
 
-export const enum BurnType {
+enum BurnType {
   BURN_TYPE_COID = 1,
   BURN_TYPE_VCID = 2,
   BURN_TYPE_FLAG = 3,
@@ -26,7 +26,7 @@ export const enum BurnType {
   BURN_TYPE_FLAG_AND_TIME = 5,
 }
 
-export const enum CancelType {
+enum CancelType {
   CANCEL_TYPE_VCID = 2,
   CANCEL_TYPE_FLAG = 3,
   CANCEL_TYPE_TIME = 4,
@@ -38,13 +38,13 @@ export const enum CancelType {
 ## Interface
 ```
 //options
-function opDid(attr: Object);
+function opDid(attr: object);
 function opNet(fol: number[], unf: number[]);
-function opVcc(coid: number, attr: Object);
-function opIssue(coid: number, vcid: number, flag: number|null, time: number, ctrl: Object|null, attr: Object|null);
-function opCancel(vcs: Object);
-function opMint(vc: Object);
-function opBurn(vcs: Object);
+function opVcc(coid: number, attr: object);
+function opIssue(coid: number, vcid: number, flag: number|null, time: number, ctrl: object|null, attr: object|null);
+function opCancel(vcs: (number | number[])[][]);
+function opMint(vc: object);
+function opBurn(vcs: (number | number[])[][]);
 
 //did (decentralized identifier)
 async function getPersonByDid(did: number);
@@ -80,8 +80,8 @@ async function getSbt(coid: number, vcid: number, flag: number, time: number, ow
 async function getMyCoidSeq(mydid: number);
 
 //utils
-function normalizeMess(obj: Object);
-function checkSign(data: Object, addr: string);
+function normalizeMess(obj: object);
+function checkSign(data: object, addr: string);
 function updateGlobalBrcSoulApi(api_base_url: string);
 function setGlobalProxyAgent(socks_proxy_url: string);
 function concateCoid(mydid: number, coid_seq: number, is_group: boolean);
