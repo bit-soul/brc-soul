@@ -189,9 +189,18 @@ export function concateCoid(mydid: number, coid_seq: number, is_group: boolean) 
   }
 }
 
-export function validateVcsItem(vcs_item: (number | number[])[]) {
+export function validateVcsItem(vcs_item: (number | number[])[], cur_time: number = Math.round(Date.now() / 1000)) {
+  if (!isArray(vcs_item) || !isNumber(cur_time)) {
+    return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+  }
+
   const type = vcs_item[0];
-  const time = Math.round(Date.now() / 1000);
+  const coid = vcs_item[1];
+
+  if (!isNumber(type) || !isNumber(coid)) {
+    return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+  }
+
   switch (type) {
     case 1: //delete_sbt_by_coid
       if (vcs_item.length !== 2) {
@@ -218,7 +227,7 @@ export function validateVcsItem(vcs_item: (number | number[])[]) {
       if (vcs_item.length !== 4 || !isNumber(vcs_item[2]) || !isNumber(vcs_item[3])) {
         return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
       }
-      if (!(vcs_item[2] >= 0 && vcs_item[3] >= 0 && vcs_item[2] <= vcs_item[3] && vcs_item[3] <= time + 7200)) {
+      if (!(vcs_item[2] >= 0 && vcs_item[3] >= 0 && vcs_item[2] <= vcs_item[3] && vcs_item[3] <= cur_time + 7200)) {
         return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
       }
       break;
@@ -226,13 +235,14 @@ export function validateVcsItem(vcs_item: (number | number[])[]) {
       if (vcs_item.length !== 5 || !isNumber(vcs_item[2]) || !isNumber(vcs_item[3]) || !isNumber(vcs_item[4])) {
         return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
       }
-      if (!(vcs_item[3] >= 0 && vcs_item[4] >= 0 && vcs_item[3] <= vcs_item[4] && vcs_item[4] <= time + 7200)) {
+      if (!(vcs_item[3] >= 0 && vcs_item[4] >= 0 && vcs_item[3] <= vcs_item[4] && vcs_item[4] <= cur_time + 7200)) {
         return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
       }
       break;
     default:
       return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
   }
+
   return null;
 }
 
