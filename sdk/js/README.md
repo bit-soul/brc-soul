@@ -38,9 +38,9 @@ enum CancelType {
 ## Interface
 ```
 //options
-function opDid(attr: object);
+function opDid(attr: object|null);
 function opNet(fol: number[], unf: number[]);
-function opVcc(coid: number, attr: object);
+function opVcc(coid: number, attr: object|null);
 function opIssue(coid: number, vcid: number, flag: number|null, time: number, ctrl: object|null, attr: object|null);
 function opCancel(vcs: (number | number[])[][]);
 function opMint(vc: object);

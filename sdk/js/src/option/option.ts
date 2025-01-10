@@ -1,8 +1,8 @@
-import { validateVcsItem } from '../utils/utils';
+import { validateVcsItem, isArray, isNumber } from '../utils/utils';
 
 const sdkglb = require('../global');
 
-export function opDid(attr: object) {
+export function opDid(attr: object | null) {
   const op_time = Math.round(Date.now() / 1000);
   const option = {
     p: 'brc-soul',
@@ -28,7 +28,7 @@ export function opNet(fol: number[], unf: number[]) {
   return option;
 }
 
-export function opVcc(coid: number, attr: object) {
+export function opVcc(coid: number, attr: object | null) {
   const op_time = Math.round(Date.now() / 1000);
   const option = {
     p: 'brc-soul',
@@ -64,14 +64,15 @@ export function opCancel(vcs: (number | number[])[][]) {
     op: 'cancel',
     vcs: vcs,
   };
-
+  if (!vcs || !isArray(vcs) || vcs.length === 0) {
+    throw 'vcs must be array and not empry: ' + JSON.stringify(vcs);
+  }
   for (const vcs_item of vcs) {
     const mess = validateVcsItem(vcs_item);
     if (mess) {
       throw mess;
     }
   }
-
   return option;
 }
 
@@ -84,10 +85,10 @@ export function opMint(vc: object) {
     vc: vc,
   };
 
-  if (!vc['coid']) throw 'vc must has coid field';
-  if (!vc['vcid']) throw 'vc must has vcid field';
-  if (!vc['time']) throw 'vc must has time field';
-  if (!vc['sign']) throw 'vc must has sign field';
+  if (!vc || !vc['coid']) throw 'vc must has coid field';
+  if (!vc || !vc['vcid']) throw 'vc must has vcid field';
+  if (!vc || !vc['time']) throw 'vc must has time field';
+  if (!vc || !vc['sign']) throw 'vc must has sign field';
 
   return option;
 }
@@ -100,6 +101,9 @@ export function opBurn(vcs: (number | number[])[][]) {
     opid: op_time,
     vcs: vcs,
   };
+  if (!vcs || !isArray(vcs) || vcs.length === 0) {
+    throw 'vcs must be array and not empry: ' + JSON.stringify(vcs);
+  }
   for (const vcs_item of vcs) {
     const mess = validateVcsItem(vcs_item);
     if (mess) {
