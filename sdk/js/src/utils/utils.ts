@@ -1,11 +1,11 @@
-let fetch = window && window.fetch ? window.fetch : null;
+let fetch = typeof window !== 'undefined' && window.fetch ? window.fetch : null;
 let bip322 = null;
 let proxyagent = null;
 const fetch_pack_name = 'node-fetch';
 const bip322_pack_name = 'bip322-js';
 const proxyagent_pack_name = 'socks-proxy-agent';
 const require_to_avoid_pack = require;
-if (typeof window !== 'undefined') {
+if (typeof window === 'undefined') {
   fetch = require_to_avoid_pack(fetch_pack_name);
   bip322 = require_to_avoid_pack(bip322_pack_name);
   proxyagent = require_to_avoid_pack(proxyagent_pack_name);
