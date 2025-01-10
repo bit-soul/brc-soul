@@ -190,57 +190,72 @@ export function concateCoid(mydid: number, coid_seq: number, is_group: boolean) 
 }
 
 export function validateVcsItem(vcs_item: (number | number[])[], cur_time: number = Math.round(Date.now() / 1000)) {
-  if (!isArray(vcs_item) || !isNumber(cur_time)) {
-    return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+  if (!isArray(vcs_item)) {
+    return 'vcs_item must be array: ' + JSON.stringify(vcs_item);
+  }
+  if (!isNumber(cur_time)) {
+    return 'cur_time must be number: ' + JSON.stringify(vcs_item);
   }
 
   const type = vcs_item[0];
   const coid = vcs_item[1];
 
   if (!isNumber(type) || !isNumber(coid)) {
-    return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+    return 'type and coid must be number: ' + JSON.stringify(vcs_item);
   }
 
   switch (type) {
     case 1: //delete_sbt_by_coid
       if (vcs_item.length !== 2) {
-        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+        return 'TYPE_COID vcs_item array length must be 2: ' + JSON.stringify(vcs_item);
       }
       break;
     case 2: //delete_sbt_by_vcid
-      if (vcs_item.length !== 3 || isArray(vcs_item[2])) {
-        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      if (vcs_item.length !== 3) {
+        return 'TYPE_VCID vcs_item array length must be 3: ' + JSON.stringify(vcs_item);
+      }
+      if (!isArray(vcs_item[2])) {
+        return 'vcids must be number array: ' + JSON.stringify(vcs_item);
       }
       //@ts-ignore
       for (const vcid of vcs_item[2]) {
         if (!isNumber(vcid)) {
-          return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+          return 'vcids must be number array: ' + JSON.stringify(vcs_item);
         }
       }
       break;
     case 3: //delete_sbt_by_flag
-      if (vcs_item.length !== 3 || !isNumber(vcs_item[2])) {
-        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      if (vcs_item.length !== 3) {
+        return 'TYPE_FLAG vcs_item array length must be 3: ' + JSON.stringify(vcs_item);
+      }
+      if (!isNumber(vcs_item[2])) {
+        return 'flag must be number: ' + JSON.stringify(vcs_item);
       }
       break;
     case 4: //delete_sbt_by_time
-      if (vcs_item.length !== 4 || !isNumber(vcs_item[2]) || !isNumber(vcs_item[3])) {
-        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      if (vcs_item.length !== 4) {
+        return 'TYPE_TIME vcs_item array length must be 4: ' + JSON.stringify(vcs_item);
+      }
+      if (!isNumber(vcs_item[2]) || !isNumber(vcs_item[3])) {
+        return 'time must be number: ' + JSON.stringify(vcs_item);
       }
       if (!(vcs_item[2] >= 0 && vcs_item[3] >= 0 && vcs_item[2] <= vcs_item[3] && vcs_item[3] <= cur_time + 7200)) {
-        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+        return 'time not in valid range(0<=time_start<=time_end<=current+7200): ' + JSON.stringify(vcs_item);
       }
       break;
     case 5: //delete_sbt_by_flag_and_time
-      if (vcs_item.length !== 5 || !isNumber(vcs_item[2]) || !isNumber(vcs_item[3]) || !isNumber(vcs_item[4])) {
-        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      if (vcs_item.length !== 5) {
+        return 'TYPE_FLAG_AND_TIME vcs_item array length must be 5: ' + JSON.stringify(vcs_item);
+      }
+      if (!isNumber(vcs_item[2]) || !isNumber(vcs_item[3]) || !isNumber(vcs_item[4])) {
+        return 'flag and time must be number: ' + JSON.stringify(vcs_item);
       }
       if (!(vcs_item[3] >= 0 && vcs_item[4] >= 0 && vcs_item[3] <= vcs_item[4] && vcs_item[4] <= cur_time + 7200)) {
-        return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+        return 'time not in valid range(0<=time_start<=time_end<=current+7200): ' + JSON.stringify(vcs_item);
       }
       break;
     default:
-      return 'vcs not valid in data: ' + JSON.stringify(vcs_item);
+      return 'vcs_item type not valid: ' + JSON.stringify(vcs_item);
   }
 
   return null;
