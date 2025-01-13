@@ -1,5 +1,3 @@
-import { normalize } from "path";
-
 let fetch = typeof window !== 'undefined' && window.fetch ? window.fetch : null;
 let bip322 = null;
 let proxyagent = null;
