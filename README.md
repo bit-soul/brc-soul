@@ -217,9 +217,9 @@ Why should use the Bitcoin chain?
 * "time" field should use UTC timestamp, and accurate to seconds.
 * "coid" must be identity global, ((CA_did<<24)|8bit_mark|16bit_number).
 * "vcid" shouldn't be zero, must be identity in the same collection.
-* "coid" and "vcid", together, they ensured the uniqueness of the CV.
-* "sign" message field should be sorted alphabetically, then serialized, and remove formatting whitespace.
+* "coid" and "vcid", together, they ensured the uniqueness of the CV, and the same CV can be minted by different user.
 * "xuri" is optional extended attribute, may be stored in ipfs, http, ordi and so on.
+* "sign" message field should be serialized according to the alphabetically sequence, with formatting whitespace removed.
 
 
 ## Official Links

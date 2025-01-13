@@ -1,3 +1,5 @@
+import { normalize } from "path";
+
 let fetch = typeof window !== 'undefined' && window.fetch ? window.fetch : null;
 let bip322 = null;
 let proxyagent = null;
@@ -81,27 +83,6 @@ export function isEqual(obj1, obj2) {
 /*********************************************************
  * brcsoul protocol utils
  *********************************************************/
-export function sortObject(obj: object) {
-  //Recursively sort each value in the dictionary and sort by keys
-  if (Array.isArray(obj)) {
-    return obj.map(sortObject);
-  }
-
-  //Recursively sort each element in the list, but keep the original order
-  if (obj !== null && typeof obj === 'object') {
-    const sortedObj = {};
-    Object.keys(obj)
-      .sort()
-      .forEach((key) => {
-        sortedObj[key] = sortObject(obj[key]);
-      });
-    return sortedObj;
-  }
-
-  //Return non-list and non-dictionary data as is
-  return obj;
-}
-
 export function deepCopy(obj) {
   if (obj === null || typeof obj !== 'object') {
     return obj;
@@ -144,7 +125,26 @@ export function merge_attr(des_attr, new_attr) {
 }
 
 export function normalizeMess(obj: object) {
-  return JSON.stringify(sortObject(obj));
+  if (obj === null || typeof obj !== 'object') {
+    return String(obj);
+  }
+
+  if (Array.isArray(obj)) {
+    const arrStr = obj.map((item) => normalizeMess(item)).join(',');
+    return `[${arrStr}]`;
+  }
+
+  const objStr = Object.keys(obj)
+    .sort()
+    .map((key) => {
+      if (obj[key] === undefined || typeof obj[key] === 'function') {
+        return '';
+      }
+      return `"${key}":${normalizeMess(obj[key])}`;
+    })
+    .filter((item) => item !== '')
+    .join(',');
+  return `{${objStr}}`;
 }
 
 export function checkSign(data: object, addr: string) {
@@ -160,7 +160,7 @@ export function checkSign(data: object, addr: string) {
     const temp = deepCopy(data);
     const sign = temp['sign'];
     delete temp['sign'];
-    const mess = JSON.stringify(sortObject(temp));
+    const mess = normalizeMess(temp);
 
     return bip322.Verifier.verifySignature(addr, mess, sign);
   } catch (e) {
