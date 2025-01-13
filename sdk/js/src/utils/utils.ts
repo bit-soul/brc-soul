@@ -123,6 +123,9 @@ export function merge_attr(des_attr, new_attr) {
 }
 
 export function normalizeMess(obj: object) {
+  if (typeof obj === 'string') {
+    return `"${obj}"`;
+  }
   if (obj === null || typeof obj !== 'object') {
     return String(obj);
   }
