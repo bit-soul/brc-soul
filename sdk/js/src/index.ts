@@ -24,7 +24,7 @@ if (!sdkglb.env || !sdkglb.config) {
 
 export { SbtState, BurnType, CancelType } from './interface';
 
-export { concateCoid, normalizeMess, checkSign, updateGlobalBrcSoulApi, setGlobalProxyAgent } from './utils/utils';
+export { concateCoid, normalizeMess, signMessage, verifySign, signOPDate, checkOPSign, updateGlobalBrcSoulApi, setGlobalProxyAgent } from './utils/utils';
 
 export { opDid, opNet, opVcc, opIssue, opCancel, opMint, opBurn } from './option/option';
 

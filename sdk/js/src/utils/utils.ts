@@ -79,6 +79,31 @@ export function isEqual(obj1, obj2) {
 }
 
 /*********************************************************
+ * bitcoin lib utils
+ *********************************************************/
+export function signMessage(privateKey, address, message) {
+  if (!bip322) {
+    return '';
+  }
+  try {
+    return bip322.Signer.sign(privateKey, address, message);
+  } catch (e) {
+    return '';
+  }
+}
+
+export function verifySign(address: string, message: string, signature: string) {
+  if (!bip322) {
+    return false;
+  }
+  try {
+    return bip322.Verifier.verifySignature(address, message, signature);
+  } catch (e) {
+    return false;
+  }
+}
+
+/*********************************************************
  * brcsoul protocol utils
  *********************************************************/
 export function deepCopy(obj) {
@@ -148,7 +173,27 @@ export function normalizeMess(obj: object) {
   return `{${objStr}}`;
 }
 
-export function checkSign(data: object, addr: string) {
+export function signOPDate(data: object, addr: string, privateKey: string) {
+  if (!bip322) {
+    return null;
+  }
+  if (data && data['sign']) {
+    return null;
+  }
+  try {
+    const temp = deepCopy(data);
+    const mess = normalizeMess(temp);
+    const sign = bip322.Signer.sign(privateKey, addr, mess);
+
+    temp['sign'] = sign;
+    return temp;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+}
+
+export function checkOPSign(data: object, addr: string) {
   if (!bip322) {
     return false;
   }

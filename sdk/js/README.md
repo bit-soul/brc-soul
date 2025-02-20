@@ -80,8 +80,11 @@ async function getSbt(coid: number, vcid: number, flag: number, time: number, ow
 async function getMyCoidSeq(mydid: number);
 
 //utils
+function signMessage(privateKey, address, message);
+function verifySign(address: string, message: string, signature: string);
 function normalizeMess(obj: object);
-function checkSign(data: object, addr: string);
+function signOPDate(data: object, addr: string, privateKey: string);
+function checkOPSign(data: object, addr: string);
 function updateGlobalBrcSoulApi(api_base_url: string);
 function setGlobalProxyAgent(socks_proxy_url: string);
 function concateCoid(mydid: number, coid_seq: number, is_group: boolean);
