@@ -1,6 +1,6 @@
 {
   "name": "brcsoul-sdk",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "brcsoul-sdk",
   "main": "dist/index.js",
   "dependencies": {
@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.23.3",
+    "@dotenvx/dotenvx": "^1.36.0",
     "@types/jest": "^29.2.0",
     "@types/node": "14",
     "@types/node-fetch": "^2.6.11",
@@ -17,7 +18,6 @@
     "@typescript-eslint/parser": "^5.4.0",
     "babel-plugin-rewire": "^1.2.0",
     "cross-env": "^6.0.0",
-    "@dotenvx/dotenvx": "^0.24.0",
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-node": "^11.1.0",
@@ -39,7 +39,7 @@
     "cov": "dotenvx -q run --env-file=env/unittest.env -- cross-env NODE_ENV=unittest BRCSOUL_SDK_ENV=unittest jest --runInBand --forceExit --colors --coverage",
     "clean": "tsc --build --clean",
     "build": "tsc --build --incremental",
-    "postinstall": "patch-package"
+    "postinstall": "node -e \"try { require('child_process').execSync('patch-package'); } catch (e) { console.log('patch-package not found'); }\""
   },
   "files": [
     "dist/",
