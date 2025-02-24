@@ -20,6 +20,7 @@ coverage
 *.un~
 .tsbuildinfo
 .tsbuildinfo.*
+package-lock.json
 
 # Editor directories and files
 .vs
