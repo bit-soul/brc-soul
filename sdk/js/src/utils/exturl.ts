@@ -1,10 +1,14 @@
 const sdkglb = require('../global');
 
+/*********************************************************
+ * ipfs
+ *********************************************************/
 export function isIPFSCID(input) {
-  const cidPattern = /^[a-z0-9]{46}$/;
+  const cidV0Pattern = /^Qm[A-Za-z0-9]{44}$/;
+  const cidV1Pattern = /^b[a-z2-7]{50,100}$/;
   if (!input) return false;
   input = input.toString().trim();
-  if (cidPattern.test(input)) {
+  if (cidV0Pattern.test(input) || cidV1Pattern.test(input)) {
     return true;
   }
   return false;
@@ -32,10 +36,15 @@ export function getIPFSUrl(input) {
   return null;
 }
 
+/*********************************************************
+ * ordi
+ *********************************************************/
 export function isOrdiIns(input) {
+  const ordiIdPattern = /^[A-Za-z0-9]{64}.\d+$/;
+  const ordiNumPattern = /^[0-9]{1,16}$/;
   if (!input) return false;
   input = input.toString().trim();
-  if (input.length < 10 || input.length === 66) {
+  if (ordiIdPattern.test(input) || ordiNumPattern.test(input)) {
     return true;
   }
   return false;
@@ -63,22 +72,12 @@ export function getOrdiUrl(input) {
   return null;
 }
 
-export function isHttpUrl(input) {
-  if (!input) return false;
+/*********************************************************
+ * export function
+ *********************************************************/
+export function formatExtralUrl(input) {
+  let format_url = null;
   input = input.toString().trim();
-  if (input.toLowerCase().startsWith('https://')) {
-    return true;
-  }
-  if (input.toLowerCase().startsWith('http://')) {
-    return true;
-  }
-  return false;
-}
-export function formatIconUrl(input) {
-  let format_url = input;
-  if (isHttpUrl(format_url)) {
-    return format_url;
-  }
   format_url = formatIPFS(input);
   if (format_url) {
     return format_url;
@@ -87,13 +86,11 @@ export function formatIconUrl(input) {
   if (format_url) {
     return format_url;
   }
-  return null;
+  return input;
 }
-export function getHttpUrl(input) {
-  let http_url = input;
-  if (isHttpUrl(http_url)) {
-    return http_url;
-  }
+export function httpExtralUrl(input) {
+  let http_url = null;
+  input = input.toString().trim();
   http_url = getIPFSUrl(input);
   if (http_url) {
     return http_url;
@@ -102,5 +99,5 @@ export function getHttpUrl(input) {
   if (http_url) {
     return http_url;
   }
-  return null;
+  return input;
 }

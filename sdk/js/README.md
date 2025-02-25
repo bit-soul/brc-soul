@@ -80,6 +80,8 @@ async function getSbt(coid: number, vcid: number, flag: number, time: number, ow
 async function getMyCoidSeq(mydid: number);
 
 //utils
+function httpExtralUrl(input: string);
+function formatExtralUrl(input: string);
 function signMessage(privateKey, address, message);
 function verifySign(address: string, message: string, signature: string);
 function normalizeMess(obj: object);
