@@ -81,14 +81,14 @@ async function getMyCoidSeq(mydid: number);
 
 //utils
 function httpExtralUrl(input: string);
-function formatExtralUrl(input: string);
+function formatExtraUrl(input: string);
 function signMessage(privateKey, address, message);
 function verifySign(address: string, message: string, signature: string);
 function normalizeMess(obj: object);
-function signOPDate(data: object, addr: string, privateKey: string);
+function signOPData(data: object, addr: string, privateKey: string);
 function checkOPSign(data: object, addr: string);
 function updateGlobalBrcSoulApi(api_base_url: string);
 function setGlobalProxyAgent(socks_proxy_url: string);
-function concateCoid(mydid: number, coid_seq: number, is_group: boolean);
+function concatCoid(mydid: number, coid_seq: number, is_group: boolean);
 
 ```
