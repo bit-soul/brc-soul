@@ -173,7 +173,7 @@ export function normalizeMess(obj: object) {
   return `{${objStr}}`;
 }
 
-export function signOPDate(data: object, addr: string, privateKey: string) {
+export function signOPData(data: object, addr: string, privateKey: string) {
   if (!bip322) {
     return null;
   }
@@ -227,7 +227,7 @@ export function parseData(data_str) {
   }
 }
 
-export function concateCoid(mydid: number, coid_seq: number, is_group: boolean) {
+export function concatCoid(mydid: number, coid_seq: number, is_group: boolean) {
   if (is_group) {
     return (mydid << 24) | (0x01 << 16) | (coid_seq & 0xffff);
   } else {
