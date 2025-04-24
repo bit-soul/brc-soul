@@ -17,7 +17,9 @@ const sdkglb = require('../global');
  * config sdk api
  *********************************************************/
 export function updateGlobalBrcSoulApi(api_base_url: string) {
-  sdkglb.config.brc_soul_api = api_base_url.replace(/\/$/, '');
+  if (api_base_url) {
+    sdkglb.config.brc_soul_api = api_base_url.replace(/\/$/, '');
+  }
 }
 
 //[ 'socks', 'socks4', 'socks4a', 'socks5', 'socks5h' ]

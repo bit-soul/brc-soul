@@ -53,7 +53,7 @@ export async function getMyGrps(mydid: number, size: number = 10, page: number =
 export async function getBatchGrps(grps: number[], mydid: number = 0) {
   const result = {};
 
-  if (grps.length <= 0 || grps.length > 100) {
+  if (!grps || grps.length <= 0 || grps.length > 100) {
     result['code'] = -1;
     result['mess'] = 'grps size must small than 100';
     return result;

@@ -77,6 +77,7 @@ export function getOrdiUrl(input) {
  *********************************************************/
 export function formatExtraUrl(input) {
   let format_url = null;
+  if (!input) return null;
   input = input.toString().trim();
   format_url = formatIPFS(input);
   if (format_url) {
@@ -90,6 +91,7 @@ export function formatExtraUrl(input) {
 }
 export function httpExtraUrl(input) {
   let http_url = null;
+  if (!input) return null;
   input = input.toString().trim();
   http_url = getIPFSUrl(input);
   if (http_url) {

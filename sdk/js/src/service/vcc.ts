@@ -53,7 +53,7 @@ export async function getMyVccs(mydid: number, size: number = 10, page: number =
 export async function getBatchVccs(vccs: number[], mydid: number = 0) {
   const result = {};
 
-  if (vccs.length <= 0 || vccs.length > 100) {
+  if (!vccs || vccs.length <= 0 || vccs.length > 100) {
     result['code'] = -1;
     result['mess'] = 'coids size must small than 100';
     return result;

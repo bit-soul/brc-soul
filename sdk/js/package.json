@@ -1,6 +1,6 @@
 {
   "name": "brcsoul-sdk",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "brcsoul-sdk",
   "main": "dist/index.js",
   "dependencies": {
