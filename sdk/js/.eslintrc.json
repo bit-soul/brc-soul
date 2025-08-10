@@ -1,17 +1,17 @@
 {
   "root": true,
+  "plugins": [
+    "node",
+    "prettier"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:node/recommended",
     "prettier"
   ],
-  "plugins": [
-    "node",
-    "prettier"
-  ],
   "ignorePatterns": ["node_modules", "dist", "jest.config.js", "main.js", "vsjest.js", "typings"],
   "env": {
-    "jest": true
+    "node": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -48,13 +48,13 @@
   "overrides": [
     {
       "files": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx", "test/**/*.ts"],
-      "parser": "@typescript-eslint/parser",
-      "extends": [
-        "plugin:@typescript-eslint/recommended"
-      ],
       "plugins": [
         "@typescript-eslint"
       ],
+      "extends": [
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "sourceType": "module",
         "ecmaVersion": "latest",
@@ -79,6 +79,17 @@
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-floating-promises": "error"
+      }
+    },
+    {
+      "files": ["test/**/*.js"],
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended"]
+      "env": {
+        "jest": true
+      },
+      "rules": {
+        "node/no-unpublished-require": "off"
       }
     }
   ]

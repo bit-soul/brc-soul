@@ -1,7 +1,0 @@
-beforeAll(() => {
-  null;
-});
-
-afterAll(() => {
-  null;
-});
